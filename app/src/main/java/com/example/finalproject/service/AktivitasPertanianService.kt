@@ -15,18 +15,18 @@ interface AktivitasPertanianService {
         "Content-Type: application/json",
     )
 
-    @GET("bacaaktivitas.php")
+    @GET("bacaperkebunan.php")
     suspend fun getAllAktivitas(): List<AktivitasPertanian>
 
-    @GET("baca1aktivitas.php")
+    @GET("baca1perkebunan.php")
     suspend fun getAktivitasById(@Query("id_aktivitas") idAktivitas: String): AktivitasPertanian
 
-    @POST("insertaktivitas.php")
+    @POST("insertperkebunan.php")
     suspend fun insertAktivitas(@Body aktivitasPertanian: AktivitasPertanian)
 
-    @PUT("editaktivitas.php/{id_aktivitas}")
+    @PUT("editaperkebunan.php/{id_aktivitas}")
     suspend fun updateAktivitas(@Query("id_aktivitas") idAktivitas: String, @Body aktivitasPertanian: AktivitasPertanian)
 
-    @DELETE("deleteaktivitas.php/{id_aktivitas}")
+    @DELETE("deleteperkebunan.php/{id_aktivitas}")
     suspend fun deleteAktivitas(@Query("id_aktivitas") idAktivitas: String): retrofit2.Response<Void>
 }

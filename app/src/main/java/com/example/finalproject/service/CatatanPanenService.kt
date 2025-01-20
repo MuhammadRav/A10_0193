@@ -15,18 +15,18 @@ interface CatatanPanenService {
         "Content-Type: application/json",
     )
 
-    @GET("bacapanen.php")
+    @GET("bacaperkebunan.php")
     suspend fun getAllCatatanPanen(): List<CatatanPanen>
 
-    @GET("baca1panen.php")
+    @GET("baca1perkebunan.php")
     suspend fun getCatatanPanenById(@Query("id_panen") idPanen: String): CatatanPanen
 
-    @POST("insertpanen.php")
+    @POST("insertperkebunan.php")
     suspend fun insertCatatanPanen(@Body catatanPanen: CatatanPanen)
 
-    @PUT("editpanen.php/{id_panen}")
+    @PUT("editperkebunan.php/{id_panen}")
     suspend fun updateCatatanPanen(@Query("id_panen") idPanen: String, @Body catatanPanen: CatatanPanen)
 
-    @DELETE("deletepanen.php/{id_panen}")
+    @DELETE("deleteperkebunan.php/{id_panen}")
     suspend fun deleteCatatanPanen(@Query("id_panen") idPanen: String): retrofit2.Response<Void>
 }
