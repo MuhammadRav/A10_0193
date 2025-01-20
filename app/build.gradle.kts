@@ -73,8 +73,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.serialization.json)
-
-
+//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
