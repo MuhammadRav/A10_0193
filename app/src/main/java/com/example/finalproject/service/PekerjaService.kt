@@ -19,14 +19,14 @@ interface PekerjaService {
     suspend fun getAllPekerja(): List<Pekerja>
 
     @GET("baca1pekerja.php")
-    suspend fun getPekerjaById(@Query("id_pekerja") idPekerja: Int): Pekerja
+    suspend fun getPekerjaById(@Query("id_pekerja") idPekerja: String): Pekerja
 
     @POST("insertpekerja.php")
     suspend fun insertPekerja(@Body pekerja: Pekerja)
 
     @PUT("editpekerja.php/{id_pekerja}")
-    suspend fun updatePekerja(@Query("id_pekerja") idPekerja: Int, @Body pekerja: Pekerja)
+    suspend fun updatePekerja(@Query("id_pekerja") idPekerja: String, @Body pekerja: Pekerja)
 
     @DELETE("deletepekerja.php/{id_pekerja}")
-    suspend fun deletePekerja(@Query("id_pekerja") idPekerja: Int): retrofit2.Response<Void>
+    suspend fun deletePekerja(@Query("id_pekerja") idPekerja: String): retrofit2.Response<Void>
 }

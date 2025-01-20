@@ -19,14 +19,14 @@ interface TanamanService {
     suspend fun getAllTanaman(): List<Tanaman>
 
     @GET("baca1perkebunan.php")
-    suspend fun getTanamanById(@Query("id_tanaman") idTanaman: Int): Tanaman
+    suspend fun getTanamanById(@Query("id_tanaman") idTanaman: String): Tanaman
 
     @POST("insertperkebunan.php")
     suspend fun insertTanaman(@Body tanaman: Tanaman)
 
     @PUT("editperkebunan.php/{id_tanaman}")
-    suspend fun updateTanaman(@Query("id_tanaman") idTanaman: Int, @Body tanaman: Tanaman)
+    suspend fun updateTanaman(@Query("id_tanaman") idTanaman: String, @Body tanaman: Tanaman)
 
     @DELETE("deleteperkebunan.php/{id_tanaman}")
-    suspend fun deleteTanaman(@Query("id_tanaman") idTanaman: Int): retrofit2.Response<Void>
+    suspend fun deleteTanaman(@Query("id_tanaman") idTanaman: String): retrofit2.Response<Void>
 }

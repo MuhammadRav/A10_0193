@@ -19,14 +19,14 @@ interface CatatanPanenService {
     suspend fun getAllCatatanPanen(): List<CatatanPanen>
 
     @GET("baca1panen.php")
-    suspend fun getCatatanPanenById(@Query("id_panen") idPanen: Int): CatatanPanen
+    suspend fun getCatatanPanenById(@Query("id_panen") idPanen: String): CatatanPanen
 
     @POST("insertpanen.php")
     suspend fun insertCatatanPanen(@Body catatanPanen: CatatanPanen)
 
     @PUT("editpanen.php/{id_panen}")
-    suspend fun updateCatatanPanen(@Query("id_panen") idPanen: Int, @Body catatanPanen: CatatanPanen)
+    suspend fun updateCatatanPanen(@Query("id_panen") idPanen: String, @Body catatanPanen: CatatanPanen)
 
     @DELETE("deletepanen.php/{id_panen}")
-    suspend fun deleteCatatanPanen(@Query("id_panen") idPanen: Int): retrofit2.Response<Void>
+    suspend fun deleteCatatanPanen(@Query("id_panen") idPanen: String): retrofit2.Response<Void>
 }

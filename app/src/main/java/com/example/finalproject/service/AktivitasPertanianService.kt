@@ -19,14 +19,14 @@ interface AktivitasPertanianService {
     suspend fun getAllAktivitas(): List<AktivitasPertanian>
 
     @GET("baca1aktivitas.php")
-    suspend fun getAktivitasById(@Query("id_aktivitas") idAktivitas: Int): AktivitasPertanian
+    suspend fun getAktivitasById(@Query("id_aktivitas") idAktivitas: String): AktivitasPertanian
 
     @POST("insertaktivitas.php")
     suspend fun insertAktivitas(@Body aktivitasPertanian: AktivitasPertanian)
 
     @PUT("editaktivitas.php/{id_aktivitas}")
-    suspend fun updateAktivitas(@Query("id_aktivitas") idAktivitas: Int, @Body aktivitasPertanian: AktivitasPertanian)
+    suspend fun updateAktivitas(@Query("id_aktivitas") idAktivitas: String, @Body aktivitasPertanian: AktivitasPertanian)
 
     @DELETE("deleteaktivitas.php/{id_aktivitas}")
-    suspend fun deleteAktivitas(@Query("id_aktivitas") idAktivitas: Int): retrofit2.Response<Void>
+    suspend fun deleteAktivitas(@Query("id_aktivitas") idAktivitas: String): retrofit2.Response<Void>
 }
