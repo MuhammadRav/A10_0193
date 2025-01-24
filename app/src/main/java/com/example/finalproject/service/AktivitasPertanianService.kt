@@ -17,18 +17,18 @@ interface AktivitasPertanianService {
         "Content-Type: application/json",
     )
 
-    @GET("/aktivitaspertanian")
+    @GET("aktivitaspertanian")
     suspend fun getAllAktivitas(): AllAktivitasPertanianResponse
 
-    @GET("/aktivitaspertanian/{id_aktivitas}")
+    @GET("aktivitaspertanian/{id_aktivitas}")
     suspend fun getAktivitasById(@Query("id_aktivitas") idAktivitas: String): AktivitasPertanianDetailResponse
 
-    @POST("/aktivitaspertanian_store")
+    @POST("aktivitaspertanian_store")
     suspend fun insertAktivitas(@Body aktivitasPertanian: AktivitasPertanian)
 
-    @PUT("/aktivitaspertanian_store/{id_aktivitas}")
+    @PUT("aktivitaspertanian_store/{id_aktivitas}")
     suspend fun updateAktivitas(@Query("id_aktivitas") idAktivitas: String, @Body aktivitasPertanian: AktivitasPertanian)
 
-    @DELETE("/aktivitaspertanian_store/{id_aktivitas}")
+    @DELETE("aktivitaspertanian_store/{id_aktivitas}")
     suspend fun deleteAktivitas(@Query("id_aktivitas") idAktivitas: String): retrofit2.Response<Void>
 }

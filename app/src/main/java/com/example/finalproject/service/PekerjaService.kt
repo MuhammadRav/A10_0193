@@ -17,18 +17,18 @@ interface PekerjaService {
         "Content-Type: application/json",
     )
 
-    @GET("/pekerja")
+    @GET("pekerja")
     suspend fun getAllPekerja(): AllPekerjaResponse
 
-    @GET("/pekerja/{id_pekerja}")
+    @GET("pekerja/{id_pekerja}")
     suspend fun getPekerjaById(@Query("id_pekerja") idPekerja: String): PekerjaDetailResponse
 
-    @POST("/pekerja_store")
+    @POST("pekerja_store")
     suspend fun insertPekerja(@Body pekerja: Pekerja)
 
-    @PUT("/pekerja_store/{id_pekerja}")
+    @PUT("pekerja_store/{id_pekerja}")
     suspend fun updatePekerja(@Query("id_pekerja") idPekerja: String, @Body pekerja: Pekerja)
 
-    @DELETE("/pekerja_store/{id_pekerja}")
+    @DELETE("pekerja_store/{id_pekerja}")
     suspend fun deletePekerja(@Query("id_pekerja") idPekerja: String): retrofit2.Response<Void>
 }
