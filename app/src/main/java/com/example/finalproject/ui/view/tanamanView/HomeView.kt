@@ -76,7 +76,7 @@ fun TanamanHomeScreen(
             }
         },
     ){ innerPadding ->
-        HomeStatus(
+        TanamanHomeStatus(
             homeUiState = viewModel.tnmUiState,
             retryAction = { viewModel.getTanaman()},
             modifier = Modifier.padding(innerPadding),
@@ -90,7 +90,7 @@ fun TanamanHomeScreen(
 }
 
 @Composable
-fun HomeStatus(
+fun TanamanHomeStatus(
     homeUiState: HomeUiState,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,

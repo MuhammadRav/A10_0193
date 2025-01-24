@@ -24,7 +24,7 @@ class TanamanDetailViewModel(
     private val tnm: TanamanRepository
 ) : ViewModel() {
 
-    var tanamandetailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
+    var tanamanDetailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
         private set
 
     private val _idTanaman: String = checkNotNull(savedStateHandle[AlamatDetailTanaman.ID_TANAMAN])
@@ -35,8 +35,8 @@ class TanamanDetailViewModel(
 
     fun getTanamanById() {
         viewModelScope.launch {
-            tanamandetailState = DetailUiState.Loading
-            tanamandetailState = try {
+            tanamanDetailState = DetailUiState.Loading
+            tanamanDetailState = try {
                 val tanaman = tnm.getTanamanById(_idTanaman)
                 DetailUiState.Success(tanaman)
             } catch (e: IOException) {
