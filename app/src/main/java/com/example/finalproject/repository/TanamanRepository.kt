@@ -1,11 +1,12 @@
 package com.example.finalproject.repository
 
+import com.example.finalproject.model.AllTanamanResponse
 import com.example.finalproject.model.Tanaman
 import com.example.finalproject.service.TanamanService
 import okio.IOException
 
 interface TanamanRepository {
-    suspend fun getTanaman(): List<Tanaman>
+    suspend fun getTanaman():AllTanamanResponse
     suspend fun insertTanaman(tanaman: Tanaman)
     suspend fun updateTanaman(idTanaman: String, tanaman: Tanaman)
     suspend fun deleteTanaman(idTanaman: String)
@@ -39,10 +40,10 @@ class NetworkTanamanRepository(
         }
     }
 
-    override suspend fun getTanaman(): List<Tanaman> =
+    override suspend fun getTanaman(): AllTanamanResponse =
         tanamanApiService.getAllTanaman()
 
     override suspend fun getTanamanById(idTanaman: String): Tanaman {
-        return tanamanApiService.getTanamanById(idTanaman)
+        return tanamanApiService.getTanamanById(idTanaman).data
     }
 }

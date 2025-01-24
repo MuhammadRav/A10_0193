@@ -1,11 +1,12 @@
 package com.example.finalproject.repository
 
+import com.example.finalproject.model.AllPekerjaResponse
 import com.example.finalproject.model.Pekerja
 import com.example.finalproject.service.PekerjaService
 import okio.IOException
 
 interface PekerjaRepository {
-    suspend fun getPekerja(): List<Pekerja>
+    suspend fun getPekerja(): AllPekerjaResponse
     suspend fun insertPekerja(pekerja: Pekerja)
     suspend fun updatePekerja(idPekerja: String, pekerja: Pekerja)
     suspend fun deletePekerja(idPekerja: String)
@@ -39,10 +40,10 @@ class NetworkPekerjaRepository(
         }
     }
 
-    override suspend fun getPekerja(): List<Pekerja> =
+    override suspend fun getPekerja(): AllPekerjaResponse =
         pekerjaApiService.getAllPekerja()
 
     override suspend fun getPekerjaById(idPekerja: String): Pekerja {
-        return pekerjaApiService.getPekerjaById(idPekerja)
+        return pekerjaApiService.getPekerjaById(idPekerja).data
     }
 }

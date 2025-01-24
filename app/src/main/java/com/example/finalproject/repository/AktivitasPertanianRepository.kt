@@ -1,11 +1,12 @@
 package com.example.finalproject.repository
 
 import com.example.finalproject.model.AktivitasPertanian
+import com.example.finalproject.model.AllAktivitasPertanianResponse
 import com.example.finalproject.service.AktivitasPertanianService
 import okio.IOException
 
 interface AktivitasPertanianRepository {
-    suspend fun getAktivitasPertanian(): List<AktivitasPertanian>
+    suspend fun getAktivitasPertanian(): AllAktivitasPertanianResponse
     suspend fun insertAktivitasPertanian(aktivitasPertanian: AktivitasPertanian)
     suspend fun updateAktivitasPertanian(idAktivitas: String, aktivitasPertanian: AktivitasPertanian)
     suspend fun deleteAktivitasPertanian(idAktivitas: String)
@@ -39,10 +40,10 @@ class NetworkAktivitasPertanianRepository(
         }
     }
 
-    override suspend fun getAktivitasPertanian(): List<AktivitasPertanian> =
+    override suspend fun getAktivitasPertanian(): AllAktivitasPertanianResponse =
         aktivitasPertanianApiService.getAllAktivitas()
 
     override suspend fun getAktivitasPertanianById(idAktivitas: String): AktivitasPertanian {
-        return aktivitasPertanianApiService.getAktivitasById(idAktivitas)
+        return aktivitasPertanianApiService.getAktivitasById(idAktivitas).data
     }
 }
