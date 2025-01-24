@@ -21,10 +21,10 @@ sealed class DetailUiState {
 
 class TanamanDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    private val tanamanRepository: TanamanRepository
+    private val tnm: TanamanRepository
 ) : ViewModel() {
 
-    var tanamanDetailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
+    var detailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
         private set
 
     private val _idTanaman: String = checkNotNull(savedStateHandle[AlamatDetailTanaman.ID_TANAMAN])
@@ -35,9 +35,9 @@ class TanamanDetailViewModel(
 
     fun getTanamanById() {
         viewModelScope.launch {
-            tanamanDetailState = DetailUiState.Loading
-            tanamanDetailState = try {
-                val tanaman = tanamanRepository.getTanamanById(_idTanaman)
+            detailState = DetailUiState.Loading
+            detailState = try {
+                val tanaman = tnm.getTanamanById(_idTanaman)
                 DetailUiState.Success(tanaman)
             } catch (e: IOException) {
                 DetailUiState.Error
@@ -47,14 +47,14 @@ class TanamanDetailViewModel(
         }
     }
 
-    fun deleteTanaman(id: String) {
+    fun deleteTanaman(idTanaman:String) {
         viewModelScope.launch {
             try {
-                tanamanRepository.deleteTanaman(id)
-            } catch (e: IOException) {
-                tanamanDetailState = DetailUiState.Error
-            } catch (e: HttpException) {
-                tanamanDetailState = DetailUiState.Error
+                tnm.deleteTanaman(idTanaman)
+            }catch (e:IOException){
+                HomeUiState.Error
+            }catch (e:HttpException){
+                HomeUiState.Error
             }
         }
     }

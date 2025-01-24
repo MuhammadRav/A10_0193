@@ -11,45 +11,42 @@ import com.example.finalproject.repository.TanamanRepository
 import kotlinx.coroutines.launch
 import okio.IOException
 
-sealed class HomeUiState {
-    data class Success(val tanaman: List<Tanaman>) : HomeUiState()
+sealed class HomeUiState{
+    data class Success(val tanaman: List<Tanaman>): HomeUiState()
     object Error : HomeUiState()
     object Loading : HomeUiState()
 }
 
-class TanamanHomeViewModel(private val tanamanRepository: TanamanRepository) : ViewModel() {
-
-    var tanamanUIState: HomeUiState by mutableStateOf(HomeUiState.Loading)
+class TanamanHomeViewModel (private val tnm: TanamanRepository): ViewModel(){
+    var tnmUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
         private set
 
     init {
         getTanaman()
     }
 
-    fun getTanaman() {
+    fun getTanaman(){
         viewModelScope.launch {
-            tanamanUIState = HomeUiState.Loading
-            tanamanUIState = try {
-                HomeUiState.Success(tanamanRepository.getTanaman())
-            } catch (e: IOException) {
+            tnmUiState = HomeUiState.Loading
+            tnmUiState = try {
+                HomeUiState.Success(tnm.getTanaman().data)
+            }catch (e: IOException){
                 HomeUiState.Error
-            } catch (e: HttpException) {
+            }catch (e: HttpException){
                 HomeUiState.Error
             }
         }
     }
 
-    fun deleteTanaman(id: String) {
+    fun deleteTanaman(idTanaman:String){
         viewModelScope.launch {
             try {
-                tanamanRepository.deleteTanaman(id)
-                getTanaman()
-            } catch (e: IOException) {
-                tanamanUIState = HomeUiState.Error
-            } catch (e: HttpException) {
-                tanamanUIState = HomeUiState.Error
+                tnm.deleteTanaman(idTanaman)
+            }catch (e: IOException){
+                HomeUiState.Error
+            }catch (e: HttpException){
+                HomeUiState.Error
             }
         }
     }
 }
-

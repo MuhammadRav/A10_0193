@@ -12,20 +12,19 @@ import kotlinx.coroutines.launch
 
 class TanamanUpdateViewModel(
     savedStateHandle: SavedStateHandle,
-    private val tanamanRepository: TanamanRepository
-): ViewModel(){
+    private val tnm: TanamanRepository
+) : ViewModel() {
     var UpdateUiState by mutableStateOf(InsertUiState())
-    private set
+        private set
 
-            private val _idTanaman: String = checkNotNull(savedStateHandle[AlamatUpdateTanaman.ID_TANAMAN])
+    private val _idTanaman: String = checkNotNull(savedStateHandle[AlamatUpdateTanaman.ID_TANAMAN])
 
     init {
         viewModelScope.launch {
-            UpdateUiState = tanamanRepository.getTanamanById(_idTanaman)
+            UpdateUiState = tnm.getTanamanById(_idTanaman)
                 .toUiStateTanaman()
         }
     }
-
     fun updateInsertTanamanState(insertUiEvent: InsertUiEvent){
         UpdateUiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
@@ -33,7 +32,7 @@ class TanamanUpdateViewModel(
     suspend fun updateTanaman(){
         viewModelScope.launch {
             try {
-                tanamanRepository.updateTanaman(_idTanaman, UpdateUiState.insertUiEvent.toTanaman())
+                tnm.updateTanaman(_idTanaman, UpdateUiState.insertUiEvent.toTanaman())
             }catch (e: Exception){
                 e.printStackTrace()
             }

@@ -46,14 +46,14 @@ import com.example.finalproject.ui.viewModel.tanamanViewModel.TanamanHomeViewMod
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+fun TanamanHomeScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
     viewModel: TanamanHomeViewModel = viewModel(factory = PenyediaTanamanViewModel.Factory)
-) {
+){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    Scaffold(
+    Scaffold (
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CstTopAppBar(
@@ -71,13 +71,14 @@ fun HomeScreen(
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(18.dp)
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Tambah Tanaman")
+                Icon(imageVector = Icons.Default.Add,
+                    contentDescription = "Add Tanaman")
             }
-        }
-    ) { innerPadding ->
+        },
+    ){innerPadding ->
         HomeStatus(
-            homeUiState = viewModel.tanamanUIState,
-            retryAction = { viewModel.getTanaman() },
+            homeUiState = viewModel.tnmUiState,
+            retryAction = { viewModel.getTanaman()},
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
@@ -95,32 +96,36 @@ fun HomeStatus(
     modifier: Modifier = Modifier,
     onDeleteClick: (Tanaman) -> Unit = {},
     onDetailClick: (String) -> Unit
-) {
-    when (homeUiState) {
+){
+    when(homeUiState){
         is HomeUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
 
-        is HomeUiState.Success -> {
-            if (homeUiState.tanaman.isEmpty()) {
-                return Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = "Tidak ada data Tanaman")
+        is HomeUiState.Success ->
+            if (homeUiState.tanaman.isEmpty()){
+                return Box(modifier = modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center){
+                    Text("Tidak ada data tanaman")
                 }
-            } else {
+            }else{
                 TanamanLayout(
                     tanaman = homeUiState.tanaman,
                     modifier = modifier.fillMaxWidth(),
-                    onDetailClick = { onDetailClick(it.idTanaman) },
-                    onDeleteClick = { onDeleteClick(it) }
+                    onDetailClick = {
+                        onDetailClick(it.idTanaman)
+                    },
+                    onDeleteClick = {
+                        onDeleteClick(it)
+                    }
                 )
             }
-        }
-
         is HomeUiState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
     }
 }
 
-// Menampilkan pesan loading saat data sedang dimuat
 @Composable
-fun OnLoading(modifier: Modifier = Modifier) {
+fun OnLoading(
+    modifier: Modifier = Modifier
+){
     Image(
         modifier = modifier.size(200.dp),
         painter = painterResource(R.drawable.op),
@@ -128,18 +133,19 @@ fun OnLoading(modifier: Modifier = Modifier) {
     )
 }
 
-// Menampilkan pesan error jika gagal memuat data
 @Composable
-fun OnError(retryAction: () -> Unit, modifier: Modifier = Modifier) {
+fun OnError(retryAction: () -> Unit, modifier: Modifier = Modifier){
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.op), contentDescription = ""
+            painter = painterResource(id = R.drawable.op),
+            contentDescription = ""
         )
-        Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
+        Text(text = stringResource(R.string.loading_failed),
+            modifier = Modifier.padding(16.dp))
         Button(onClick = retryAction) {
             Text(stringResource(R.string.retry))
         }
@@ -152,21 +158,21 @@ fun TanamanLayout(
     modifier: Modifier = Modifier,
     onDetailClick: (Tanaman) -> Unit,
     onDeleteClick: (Tanaman) -> Unit = {}
-) {
-    LazyColumn(
+){
+    LazyColumn (
         modifier = modifier,
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        items(tanaman) { tanaman ->
+        contentPadding = PaddingValues(16.dp)
+    ){
+        items(tanaman){
+                tanaman ->
             TanamanCard(
                 tanaman = tanaman,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable {
-                        onDetailClick(tanaman) },
+                    .clickable { onDetailClick(tanaman) },
                 onDeleteClick = {
-                    onDeleteClick(tanaman) }
+                    onDeleteClick(tanaman)
+                }
             )
         }
     }
@@ -176,15 +182,15 @@ fun TanamanLayout(
 fun TanamanCard(
     tanaman: Tanaman,
     modifier: Modifier = Modifier,
-    onDeleteClick: (Tanaman) -> Unit = {}
-) {
-    Card(
+    onDeleteClick: (Tanaman) -> Unit
+){
+    Card (
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Row(
@@ -193,27 +199,27 @@ fun TanamanCard(
             ) {
                 Text(
                     text = tanaman.namaTanaman,
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))
                 IconButton(onClick = { onDeleteClick(tanaman) }) {
                     Icon(
                         imageVector = Icons.Default.Delete,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 }
                 Text(
                     text = tanaman.idTanaman,
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleMedium,
                 )
             }
             Text(
                 text = tanaman.periodeTanam,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
             )
             Text(
                 text = tanaman.deskripsiTanaman,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
             )
         }
     }

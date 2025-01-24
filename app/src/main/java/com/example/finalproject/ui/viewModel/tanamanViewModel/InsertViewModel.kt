@@ -9,18 +9,18 @@ import com.example.finalproject.model.Tanaman
 import com.example.finalproject.repository.TanamanRepository
 import kotlinx.coroutines.launch
 
-class TanamanInsertViewModel (private val tanamanRepository: TanamanRepository): ViewModel() {
+class TanamanInsertViewModel(private val tnm: TanamanRepository): ViewModel(){
     var uiState by mutableStateOf(InsertUiState())
         private set
 
-    fun tanamanUpdateInsertState(insertUiEvent:InsertUiEvent) {
+    fun updateInsertTanamanState(insertUiEvent: InsertUiEvent){
         uiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
-    suspend fun inserttanamanRepository() {
-        viewModelScope.launch{
+    suspend fun insertTanaman(){
+        viewModelScope.launch {
             try {
-                tanamanRepository.insertTanaman(uiState.insertUiEvent.toTanaman())
+                tnm.insertTanaman(uiState.insertUiEvent.toTanaman())
             }catch (e:Exception){
                 e.printStackTrace()
             }
@@ -43,7 +43,7 @@ fun InsertUiEvent.toTanaman(): Tanaman = Tanaman(
     idTanaman = idTanaman,
     namaTanaman = namaTanaman,
     periodeTanam = periodeTanam,
-    deskripsiTanaman = deskripsiTanaman
+    deskripsiTanaman = deskripsiTanaman,
 )
 
 fun Tanaman.toUiStateTanaman(): InsertUiState = InsertUiState(
@@ -54,5 +54,5 @@ fun Tanaman.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
     idTanaman = idTanaman,
     namaTanaman = namaTanaman,
     periodeTanam = periodeTanam,
-    deskripsiTanaman = deskripsiTanaman
+    deskripsiTanaman = deskripsiTanaman,
 )
