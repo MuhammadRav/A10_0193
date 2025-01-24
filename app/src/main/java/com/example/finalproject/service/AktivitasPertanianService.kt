@@ -1,6 +1,8 @@
 package com.example.finalproject.service
 
 import com.example.finalproject.model.AktivitasPertanian
+import com.example.finalproject.model.AktivitasPertanianDetailResponse
+import com.example.finalproject.model.AllAktivitasPertanianResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -15,18 +17,18 @@ interface AktivitasPertanianService {
         "Content-Type: application/json",
     )
 
-    @GET("bacaperkebunan.php")
-    suspend fun getAllAktivitas(): List<AktivitasPertanian>
+    @GET("/aktivitaspertanian")
+    suspend fun getAllAktivitas(): AllAktivitasPertanianResponse
 
-    @GET("baca1perkebunan.php")
-    suspend fun getAktivitasById(@Query("id_aktivitas") idAktivitas: String): AktivitasPertanian
+    @GET("/aktivitaspertanian/{id_aktivitas}")
+    suspend fun getAktivitasById(@Query("id_aktivitas") idAktivitas: String): AktivitasPertanianDetailResponse
 
-    @POST("insertperkebunan.php")
+    @POST("/aktivitaspertanian_store")
     suspend fun insertAktivitas(@Body aktivitasPertanian: AktivitasPertanian)
 
-    @PUT("editaperkebunan.php/{id_aktivitas}")
+    @PUT("/aktivitaspertanian_store/{id_aktivitas}")
     suspend fun updateAktivitas(@Query("id_aktivitas") idAktivitas: String, @Body aktivitasPertanian: AktivitasPertanian)
 
-    @DELETE("deleteperkebunan.php/{id_aktivitas}")
+    @DELETE("/aktivitaspertanian_store/{id_aktivitas}")
     suspend fun deleteAktivitas(@Query("id_aktivitas") idAktivitas: String): retrofit2.Response<Void>
 }

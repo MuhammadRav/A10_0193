@@ -1,6 +1,8 @@
 package com.example.finalproject.service
 
+import com.example.finalproject.model.AllPekerjaResponse
 import com.example.finalproject.model.Pekerja
+import com.example.finalproject.model.PekerjaDetailResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -15,18 +17,18 @@ interface PekerjaService {
         "Content-Type: application/json",
     )
 
-    @GET("bacaperkebunan.php")
-    suspend fun getAllPekerja(): List<Pekerja>
+    @GET("/pekerja")
+    suspend fun getAllPekerja(): AllPekerjaResponse
 
-    @GET("baca1perkebunan.php")
-    suspend fun getPekerjaById(@Query("id_pekerja") idPekerja: String): Pekerja
+    @GET("/pekerja/{id_pekerja}")
+    suspend fun getPekerjaById(@Query("id_pekerja") idPekerja: String): PekerjaDetailResponse
 
-    @POST("insertperkebunan.php")
+    @POST("/pekerja_store")
     suspend fun insertPekerja(@Body pekerja: Pekerja)
 
-    @PUT("editperkebunan.php/{id_pekerja}")
+    @PUT("/pekerja_store/{id_pekerja}")
     suspend fun updatePekerja(@Query("id_pekerja") idPekerja: String, @Body pekerja: Pekerja)
 
-    @DELETE("deleteperkebunan.php/{id_pekerja}")
+    @DELETE("/pekerja_store/{id_pekerja}")
     suspend fun deletePekerja(@Query("id_pekerja") idPekerja: String): retrofit2.Response<Void>
 }
