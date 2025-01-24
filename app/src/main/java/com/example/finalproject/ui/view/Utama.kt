@@ -56,9 +56,9 @@ fun Utama(
                 .padding(16.dp)
         ) {
             MenuCard(
-                imageRes = R.drawable.tanaman,
+                imageRes = R.drawable.tanam,
                 title = "Tanaman",
-                buttonColor = Color.Cyan,
+                buttonColor = Color.Green,
                 onClick = onTanamanButton
             )
 
@@ -146,13 +146,13 @@ fun MenuCard(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun UtamaPreview() {
-//    Utama(
-//        onTanamanButton = {},
-//        onPekerjaButton = {},
-//        onAktivitasButton = {},
-//        onCatatanButton = {}
-//    )
-//}
+@Preview(showBackground = true)
+@Composable
+fun UtamaPreview() {
+    Utama(
+        onTanamanButton = {},
+        onPekerjaButton = {},
+        onAktivitasButton = {},
+        onCatatanButton = {}
+    )
+}

@@ -47,7 +47,7 @@ import com.example.finalproject.ui.viewModel.tanamanViewModel.TanamanHomeViewMod
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TanamanHomeScreen(
-    navigateToItemEntry: () -> Unit,
+    onAddTanaman: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
     viewModel: TanamanHomeViewModel = viewModel(factory = PenyediaTanamanViewModel.Factory)
@@ -67,7 +67,7 @@ fun TanamanHomeScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = navigateToItemEntry,
+                onClick = onAddTanaman,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(18.dp)
             ) {
@@ -75,7 +75,7 @@ fun TanamanHomeScreen(
                     contentDescription = "Add Tanaman")
             }
         },
-    ){innerPadding ->
+    ){ innerPadding ->
         HomeStatus(
             homeUiState = viewModel.tnmUiState,
             retryAction = { viewModel.getTanaman()},
@@ -106,7 +106,7 @@ fun HomeStatus(
                     contentAlignment = Alignment.Center){
                     Text("Tidak ada data tanaman")
                 }
-            }else{
+            } else{
                 TanamanLayout(
                     tanaman = homeUiState.tanaman,
                     modifier = modifier.fillMaxWidth(),
@@ -134,7 +134,9 @@ fun OnLoading(
 }
 
 @Composable
-fun OnError(retryAction: () -> Unit, modifier: Modifier = Modifier){
+fun OnError(retryAction: () -> Unit,
+            modifier: Modifier = Modifier
+){
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
