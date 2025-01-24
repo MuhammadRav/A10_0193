@@ -1,19 +1,25 @@
 package com.example.finalproject.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Tanaman(
-    @SerialName("id_tanaman")
     val idTanaman: String,
-
-    @SerialName("nama_tanaman")
     val namaTanaman: String,
-
-    @SerialName("periode_tanam")
-    val periodeTanam: String,
-
-    @SerialName("deskripsi_tanaman")
+    val periodeTanam : String,
     val deskripsiTanaman: String
+    )
+
+@Serializable
+data class AllTanamanResponse(
+    val status: Boolean,
+    val message: String,
+    val data: List<Tanaman>
+)
+
+@Serializable
+data class TanamanDetailResponse(
+    val status: Boolean,
+    val message: String,
+    val data: Tanaman
 )
