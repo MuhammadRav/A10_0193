@@ -25,7 +25,7 @@ interface AppContainer {
 }
 
 class PerkebunanContainer : AppContainer {
-    private val baseUrl = "http://10.0.2.2/perkebunan/"
+    private val baseUrl = "http://10.0.2.2/api/"
     private val json = Json { ignoreUnknownKeys = true }
 
     private val retrofit: Retrofit = Retrofit.Builder()
