@@ -9,7 +9,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.finalproject.ui.view.Utama
+import com.example.finalproject.ui.view.pekerjaView.PekerjaDetailScreen
+import com.example.finalproject.ui.view.pekerjaView.PekerjaHomeScreen
+import com.example.finalproject.ui.view.pekerjaView.PekerjaInsertScreen
+import com.example.finalproject.ui.view.pekerjaView.PekerjaUpdateScreen
+import com.example.finalproject.ui.view.tanamanView.TanamanDetailScreen
 import com.example.finalproject.ui.view.tanamanView.TanamanHomeScreen
+import com.example.finalproject.ui.view.tanamanView.TanamanInsertScreen
+import com.example.finalproject.ui.view.tanamanView.TanamanUpdateScreen
 
 @Composable
 fun PengelolaHalaman(
@@ -55,53 +62,99 @@ fun PengelolaHalaman(
                 modifier = modifier
             )
         }
-//        composable(
-//            route = AlamatInsertTanaman.route
-//        ){
-//            TanamanInsertView(
-//                onBack = {
-//                    navController.popBackStack()
-//                },
-//                onNavigate = {
-//                    navController.popBackStack()
-//                },
-//                modifier = modifier,
-//            )
-//        }
-//        composable(
-//            AlamatDetailTanaman.routesWithArg,
-//            arguments = listOf(
-//                navArgument(AlamatDetailTanaman.ID_TANAMAN){
-//                    type = NavType.StringType
-//                }
-//            )
-//        ){
-//            val idTanaman = it.arguments?.getString(AlamatDetailTanaman.ID_TANAMAN)
-//            idTanaman?.let { idTanaman ->
-//                TanamanDetailView(
-//                    onBack = {
-//                        navController.popBackStack()
-//                    },
-//                )
-//            }
-//        }
-//        composable(
-//            AlamatUpdateTanaman.routesWithArg,
-//            arguments = listOf(
-//                navArgument(AlamatUpdateTanaman.ID_TANAMAN){
-//                    type = NavType.StringType
-//                }
-//            )
-//        ){
-//            TanamanUpdateView(
-//                onBack = {
-//                    navController.popBackStack()
-//                },
-//                onNavigate = {
-//                    navController.popBackStack()
-//                },
-//                modifier = modifier,
-//            )
-//        }
+        composable(
+            route = AlamatInsertTanaman.route
+        ){
+            TanamanInsertScreen(navigateBack = {
+                navController.navigate(AlamatHomeTanaman.route){
+                    popUpTo(AlamatHomeTanaman.route){
+                        inclusive = true
+                    }
+                }
+            })
+        }
+        composable(AlamatDetailTanaman.routesWithArg,
+            arguments = listOf(navArgument(AlamatDetailTanaman.ID_TANAMAN) {
+            type = NavType.StringType })
+        ){
+            val idTanaman = it.arguments?.getString(AlamatDetailTanaman.ID_TANAMAN)
+            idTanaman?.let { idTanaman ->
+                TanamanDetailScreen(
+                    onUpdateButton = { navController.navigate("${AlamatDetailTanaman.route}/$idTanaman") },
+                    navigateBack = { navController.navigate(AlamatHomeTanaman.route) {
+                        popUpTo(AlamatHomeTanaman.route) { inclusive = true }
+                    }
+                    }
+                )
+            }
+        }
+        composable(AlamatUpdateTanaman.routesWithArg,
+                arguments = listOf(navArgument(AlamatDetailTanaman.ID_TANAMAN){
+            type = NavType.StringType })
+        ){
+            val idTanaman = it.arguments?.getString(AlamatUpdateTanaman.ID_TANAMAN)
+            idTanaman?.let { idTanaman ->
+                TanamanUpdateScreen(
+                    onBack = { navController.popBackStack() },
+                    onNavigate = { navController.popBackStack() }
+                )
+            }
+        }
+        // pekerja
+
+        composable(
+            route = AlamatHomePekerja.route
+        ){
+            PekerjaHomeScreen(
+                onDetailClick = { idPekerja ->
+                    navController.navigate("${AlamatDetailPekerja.route}/$idPekerja")
+                    println(
+                        "Pengelola Halaman: ID_PEKERJA = $idPekerja"
+                    )
+                },
+                onAddPekerja = {
+                    navController.navigate(AlamatInsertPekerja.route)
+                },
+                modifier = modifier
+            )
+        }
+        composable(
+            route = AlamatInsertPekerja.route
+        ){
+            PekerjaInsertScreen(navigateBack = {
+                navController.navigate(AlamatHomePekerja.route){
+                    popUpTo(AlamatHomePekerja.route){
+                        inclusive = true
+                    }
+                }
+            })
+        }
+        composable(AlamatDetailPekerja.routesWithArg,
+            arguments = listOf(navArgument(AlamatDetailPekerja.ID_PEKERJA) {
+                type = NavType.StringType })
+        ){
+            val idPekerja = it.arguments?.getString(AlamatDetailPekerja.ID_PEKERJA)
+            idPekerja?.let { idPekerja ->
+                PekerjaDetailScreen(
+                    onUpdateButton = { navController.navigate("${AlamatDetailPekerja.route}/$idPekerja") },
+                    navigateBack = { navController.navigate(AlamatHomePekerja.route) {
+                        popUpTo(AlamatHomePekerja.route) { inclusive = true }
+                    }
+                    }
+                )
+            }
+        }
+        composable(AlamatUpdatePekerja.routesWithArg,
+            arguments = listOf(navArgument(AlamatDetailPekerja.ID_PEKERJA){
+                type = NavType.StringType })
+        ){
+            val idPekerja = it.arguments?.getString(AlamatUpdatePekerja.ID_PEKERJA)
+            idPekerja?.let { idPekerja ->
+                PekerjaUpdateScreen(
+                    onBack = { navController.popBackStack() },
+                    onNavigate = { navController.popBackStack() }
+                )
+            }
+        }
     }
 }
