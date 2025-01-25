@@ -7,7 +7,6 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.finalproject.PerkebunanApplications
 
-
 object PenyediaCatatanPanenViewModel {
     val Factory = viewModelFactory {
         initializer {
