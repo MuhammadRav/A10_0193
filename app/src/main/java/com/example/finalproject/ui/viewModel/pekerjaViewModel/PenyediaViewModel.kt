@@ -6,10 +6,6 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.finalproject.PerkebunanApplications
-import com.example.finalproject.ui.viewModel.tanamanViewModel.TanamanDetailViewModel
-import com.example.finalproject.ui.viewModel.tanamanViewModel.TanamanHomeViewModel
-import com.example.finalproject.ui.viewModel.tanamanViewModel.TanamanInsertViewModel
-import com.example.finalproject.ui.viewModel.tanamanViewModel.TanamanUpdateViewModel
 
 object PenyediaPekerjaViewModel {
     val Factory = viewModelFactory {
