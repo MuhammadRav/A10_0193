@@ -27,7 +27,7 @@ class TanamanDetailViewModel(
     var tanamanDetailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
         private set
 
-    private val _idTanaman: String = checkNotNull(savedStateHandle[AlamatDetailTanaman.ID_TANAMAN])
+    private val _id_tanaman: String = checkNotNull(savedStateHandle[AlamatDetailTanaman.ID_TANAMAN])
 
     init {
         getTanamanById()
@@ -37,7 +37,7 @@ class TanamanDetailViewModel(
         viewModelScope.launch {
             tanamanDetailState = DetailUiState.Loading
             tanamanDetailState = try {
-                val tanaman = tnm.getTanamanById(_idTanaman)
+                val tanaman = tnm.getTanamanById(_id_tanaman)
                 DetailUiState.Success(tanaman)
             } catch (e: IOException) {
                 DetailUiState.Error
@@ -47,10 +47,10 @@ class TanamanDetailViewModel(
         }
     }
 
-    fun deleteTanaman(idTanaman:String) {
+    fun deleteTanaman(id_tanaman:String) {
         viewModelScope.launch {
             try {
-                tnm.deleteTanaman(idTanaman)
+                tnm.deleteTanaman(id_tanaman)
             }catch (e:IOException){
                 HomeUiState.Error
             }catch (e:HttpException){

@@ -17,11 +17,11 @@ class TanamanUpdateViewModel(
     var UpdateUiState by mutableStateOf(InsertUiState())
         private set
 
-    private val _idTanaman: String = checkNotNull(savedStateHandle[AlamatUpdateTanaman.ID_TANAMAN])
+    private val _id_tanaman: String = checkNotNull(savedStateHandle[AlamatUpdateTanaman.ID_TANAMAN])
 
     init {
         viewModelScope.launch {
-            UpdateUiState = tnm.getTanamanById(_idTanaman)
+            UpdateUiState = tnm.getTanamanById(_id_tanaman)
                 .toUiStateTanaman()
         }
     }
@@ -29,10 +29,10 @@ class TanamanUpdateViewModel(
         UpdateUiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
-    suspend fun updateTanaman(){
+     fun updateTanaman(){
         viewModelScope.launch {
             try {
-                tnm.updateTanaman(_idTanaman, UpdateUiState.insertUiEvent.toTanaman())
+                tnm.updateTanaman(_id_tanaman, UpdateUiState.insertUiEvent.toTanaman())
             }catch (e: Exception){
                 e.printStackTrace()
             }

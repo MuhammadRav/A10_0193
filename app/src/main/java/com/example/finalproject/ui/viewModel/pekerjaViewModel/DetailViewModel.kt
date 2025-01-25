@@ -27,7 +27,7 @@ class PekerjaDetailViewModel(
     var pekerjaDetailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
         private set
 
-    private val _idPekerja: String = checkNotNull(savedStateHandle[AlamatDetailPekerja.ID_PEKERJA])
+    private val _id_pekerja: String = checkNotNull(savedStateHandle[AlamatDetailPekerja.ID_PEKERJA])
 
     init {
         getPekerjaById()
@@ -37,7 +37,7 @@ class PekerjaDetailViewModel(
         viewModelScope.launch {
             pekerjaDetailState = DetailUiState.Loading
             pekerjaDetailState = try {
-                val pekerja = pkj.getPekerjaById(_idPekerja)
+                val pekerja = pkj.getPekerjaById(_id_pekerja)
                 DetailUiState.Success(pekerja)
             } catch (e: IOException) {
                 DetailUiState.Error
@@ -47,10 +47,10 @@ class PekerjaDetailViewModel(
         }
     }
 
-    fun deletePekerja(idPekerja:String) {
+    fun deletePekerja(id_pekerja:String) {
         viewModelScope.launch {
             try {
-                pkj.deletePekerja(idPekerja)
+                pkj.deletePekerja(id_pekerja)
             }catch (e:IOException){
                 HomeUiState.Error
             }catch (e: HttpException){

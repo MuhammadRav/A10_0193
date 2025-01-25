@@ -33,17 +33,17 @@ data class InsertUiState(
 )
 
 data class InsertUiEvent(
-    val idTanaman: String = "",
-    val namaTanaman: String = "",
-    val periodeTanam: String = "",
-    val deskripsiTanaman: String = "",
+    val id_tanaman: String = "",
+    val nama_tanaman: String = "",
+    val periode_tanam: String = "",
+    val deskripsi_tanaman: String = "",
 )
 
 fun InsertUiEvent.toTanaman(): Tanaman = Tanaman(
-    id_tanaman = idTanaman,
-    nama_tanaman = namaTanaman,
-    periode_tanam = periodeTanam,
-    deskripsi_tanaman = deskripsiTanaman,
+    id_tanaman = id_tanaman,
+    nama_tanaman = nama_tanaman,
+    periode_tanam = periode_tanam,
+    deskripsi_tanaman = deskripsi_tanaman,
 )
 
 fun Tanaman.toUiStateTanaman(): InsertUiState = InsertUiState(
@@ -51,8 +51,8 @@ fun Tanaman.toUiStateTanaman(): InsertUiState = InsertUiState(
 )
 
 fun Tanaman.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
-    idTanaman = id_tanaman,
-    namaTanaman = nama_tanaman,
-    periodeTanam = periode_tanam,
-    deskripsiTanaman = deskripsi_tanaman,
+    id_tanaman = id_tanaman,
+    nama_tanaman = nama_tanaman,
+    periode_tanam = periode_tanam,
+    deskripsi_tanaman = deskripsi_tanaman,
 )

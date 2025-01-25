@@ -8,9 +8,9 @@ import okio.IOException
 interface TanamanRepository {
     suspend fun getTanaman():AllTanamanResponse
     suspend fun insertTanaman(tanaman: Tanaman)
-    suspend fun updateTanaman(idTanaman: String, tanaman: Tanaman)
-    suspend fun deleteTanaman(idTanaman: String)
-    suspend fun getTanamanById(idTanaman: String): Tanaman
+    suspend fun updateTanaman(id_tanaman: String, tanaman: Tanaman)
+    suspend fun deleteTanaman(id_tanaman: String)
+    suspend fun getTanamanById(id_tanaman: String): Tanaman
 }
 
 class NetworkTanamanRepository(
@@ -21,13 +21,13 @@ class NetworkTanamanRepository(
         tanamanApiService.insertTanaman(tanaman)
     }
 
-    override suspend fun updateTanaman(idTanaman: String, tanaman: Tanaman) {
-        tanamanApiService.updateTanaman(idTanaman, tanaman)
+    override suspend fun updateTanaman(id_tanaman: String, tanaman: Tanaman) {
+        tanamanApiService.updateTanaman(id_tanaman, tanaman)
     }
 
-    override suspend fun deleteTanaman(idTanaman: String) {
+    override suspend fun deleteTanaman(id_tanaman: String) {
         try {
-            val response = tanamanApiService.deleteTanaman(idTanaman)
+            val response = tanamanApiService.deleteTanaman(id_tanaman)
             if (!response.isSuccessful) {
                 throw IOException("Failed to delete Tanaman. HTTP Status code: " +
                         "${response.code()}")
@@ -43,7 +43,7 @@ class NetworkTanamanRepository(
     override suspend fun getTanaman(): AllTanamanResponse =
         tanamanApiService.getAllTanaman()
 
-    override suspend fun getTanamanById(idTanaman: String): Tanaman {
-        return tanamanApiService.getTanamanById(idTanaman).data
+    override suspend fun getTanamanById(id_tanaman: String): Tanaman {
+        return tanamanApiService.getTanamanById(id_tanaman).data
     }
 }

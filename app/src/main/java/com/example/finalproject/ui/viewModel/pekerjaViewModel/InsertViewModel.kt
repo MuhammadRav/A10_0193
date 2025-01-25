@@ -33,17 +33,17 @@ data class InsertUiState(
 )
 
 data class InsertUiEvent(
-    val idPekerja: String = "",
-    val namaPekerja: String = "",
+    val id_pekerja: String = "",
+    val nama_pekerja: String = "",
     val jabatan: String = "",
-    val kontakPekerja: String = "",
+    val kontak_pekerja: String = "",
 )
 
 fun InsertUiEvent.toPekerja(): Pekerja = Pekerja(
-    id_pekerja = idPekerja,
-    nama_pekerja = namaPekerja,
+    id_pekerja = id_pekerja,
+    nama_pekerja = nama_pekerja,
     jabatan = jabatan,
-    kontak_pekerja = kontakPekerja,
+    kontak_pekerja = kontak_pekerja,
 )
 
 fun Pekerja.toUiStatePekerja(): InsertUiState = InsertUiState(
@@ -51,8 +51,8 @@ fun Pekerja.toUiStatePekerja(): InsertUiState = InsertUiState(
 )
 
 fun Pekerja.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
-    idPekerja = id_pekerja,
-    namaPekerja = nama_pekerja,
+    id_pekerja = id_pekerja,
+    nama_pekerja = nama_pekerja,
     jabatan = jabatan,
-    kontakPekerja = kontak_pekerja,
+    kontak_pekerja = kontak_pekerja,
 )

@@ -17,18 +17,18 @@ interface CatatanPanenService {
         "Content-Type: application/json",
     )
 
-    @GET("catatanpanen")
+    @GET("catatanpanen/")
     suspend fun getAllCatatanPanen(): AllCatatanPanenResponse
 
     @GET("catatanpanen/{id_panen}")
     suspend fun getCatatanPanenById(@Path("id_panen") idPanen: String): CatatanPanenDetailResponse
 
-    @POST("catatanpanen_store")
+    @POST("catatanpanen/catatanpanen_store")
     suspend fun insertCatatanPanen(@Body catatanPanen: CatatanPanen)
 
-    @PUT("catatanpanen_store/{id_panen}")
+    @PUT("catatanpanen/{id_panen}")
     suspend fun updateCatatanPanen(@Path("id_panen") idPanen: String, @Body catatanPanen: CatatanPanen)
 
-    @DELETE("catatanpanen_store/{id_panen}")
+    @DELETE("catatanpanen/{id_panen}")
     suspend fun deleteCatatanPanen(@Path("id_panen") idPanen: String): retrofit2.Response<Void>
 }

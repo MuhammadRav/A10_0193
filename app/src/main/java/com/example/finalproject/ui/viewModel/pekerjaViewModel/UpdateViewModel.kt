@@ -17,11 +17,11 @@ class PekerjaUpdateViewModel(
     var UpdateUiState by mutableStateOf(InsertUiState())
         private set
 
-    private val _idPekerja: String = checkNotNull(savedStateHandle[AlamatUpdatePekerja.ID_PEKERJA])
+    private val _id_pekerja: String = checkNotNull(savedStateHandle[AlamatUpdatePekerja.ID_PEKERJA])
 
     init {
         viewModelScope.launch {
-            UpdateUiState = pkj.getPekerjaById(_idPekerja)
+            UpdateUiState = pkj.getPekerjaById(_id_pekerja)
                 .toUiStatePekerja()
         }
     }
@@ -32,7 +32,7 @@ class PekerjaUpdateViewModel(
     suspend fun updatePekerja(){
         viewModelScope.launch {
             try {
-                pkj.updatePekerja(_idPekerja, UpdateUiState.insertUiEvent.toPekerja())
+                pkj.updatePekerja(_id_pekerja, UpdateUiState.insertUiEvent.toPekerja())
             }catch (e: Exception){
                 e.printStackTrace()
             }

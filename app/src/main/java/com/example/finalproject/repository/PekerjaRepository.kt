@@ -8,9 +8,9 @@ import okio.IOException
 interface PekerjaRepository {
     suspend fun getPekerja(): AllPekerjaResponse
     suspend fun insertPekerja(pekerja: Pekerja)
-    suspend fun updatePekerja(idPekerja: String, pekerja: Pekerja)
-    suspend fun deletePekerja(idPekerja: String)
-    suspend fun getPekerjaById(idPekerja: String): Pekerja
+    suspend fun updatePekerja(id_pekerja: String, pekerja: Pekerja)
+    suspend fun deletePekerja(id_pekerja: String)
+    suspend fun getPekerjaById(id_pekerja: String): Pekerja
 }
 
 class NetworkPekerjaRepository(
@@ -21,13 +21,13 @@ class NetworkPekerjaRepository(
         pekerjaApiService.insertPekerja(pekerja)
     }
 
-    override suspend fun updatePekerja(idPekerja: String, pekerja: Pekerja) {
-        pekerjaApiService.updatePekerja(idPekerja, pekerja)
+    override suspend fun updatePekerja(id_pekerja: String, pekerja: Pekerja) {
+        pekerjaApiService.updatePekerja(id_pekerja, pekerja)
     }
 
-    override suspend fun deletePekerja(idPekerja: String) {
+    override suspend fun deletePekerja(id_pekerja: String) {
         try {
-            val response = pekerjaApiService.deletePekerja(idPekerja)
+            val response = pekerjaApiService.deletePekerja(id_pekerja)
             if (!response.isSuccessful) {
                 throw IOException("Failed to delete Pekerja. HTTP Status code: " +
                         "${response.code()}")
@@ -43,7 +43,7 @@ class NetworkPekerjaRepository(
     override suspend fun getPekerja(): AllPekerjaResponse =
         pekerjaApiService.getAllPekerja()
 
-    override suspend fun getPekerjaById(idPekerja: String): Pekerja {
-        return pekerjaApiService.getPekerjaById(idPekerja).data
+    override suspend fun getPekerjaById(id_pekerja: String): Pekerja {
+        return pekerjaApiService.getPekerjaById(id_pekerja).data
     }
 }

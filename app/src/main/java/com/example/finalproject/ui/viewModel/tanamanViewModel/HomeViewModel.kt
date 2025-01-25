@@ -38,10 +38,10 @@ class TanamanHomeViewModel (private val tnm: TanamanRepository): ViewModel(){
         }
     }
 
-    fun deleteTanaman(idTanaman:String){
+    fun deleteTanaman(id_tanaman:String){
         viewModelScope.launch {
             try {
-                tnm.deleteTanaman(idTanaman)
+                tnm.deleteTanaman(id_tanaman)
             }catch (e: IOException){
                 HomeUiState.Error
             }catch (e: HttpException){

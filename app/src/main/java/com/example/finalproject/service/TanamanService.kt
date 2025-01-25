@@ -17,18 +17,18 @@ interface TanamanService {
         "Content-Type: application/json",
     )
 
-    @GET("tanaman")
+    @GET("tanaman/")
     suspend fun getAllTanaman(): AllTanamanResponse
 
     @GET("tanaman/{id_tanaman}")
-    suspend fun getTanamanById(@Path("id_tanaman") idTanaman: String): TanamanDetailResponse
+    suspend fun getTanamanById(@Path("id_tanaman") id_tanaman: String): TanamanDetailResponse
 
-    @POST("tanaman_store")
+    @POST("tanaman/tanaman_store")
     suspend fun insertTanaman(@Body tanaman: Tanaman)
 
-    @PUT("tanaman_store/{id_tanaman}")
-    suspend fun updateTanaman(@Path("id_tanaman") idTanaman: String, @Body tanaman: Tanaman)
+    @PUT("tanaman/{id_tanaman}")
+    suspend fun updateTanaman(@Path("id_tanaman") id_tanaman: String, @Body tanaman: Tanaman)
 
-    @DELETE("tanaman_store/{id_tanaman}")
-    suspend fun deleteTanaman(@Path("id_tanaman") idTanaman: String): retrofit2.Response<Void>
+    @DELETE("tanaman/{id_tanaman}")
+    suspend fun deleteTanaman(@Path("id_tanaman") id_tanaman: String): retrofit2.Response<Void>
 }

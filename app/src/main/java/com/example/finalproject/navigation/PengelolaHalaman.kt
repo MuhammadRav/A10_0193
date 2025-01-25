@@ -50,10 +50,10 @@ fun PengelolaHalaman(
             route = AlamatHomeTanaman.route
         ){
             TanamanHomeScreen(
-                onDetailClick = { idTanaman ->
-                    navController.navigate("${AlamatDetailTanaman.route}/$idTanaman")
+                onDetailClick = { id_tanaman ->
+                    navController.navigate("${AlamatDetailTanaman.route}/$id_tanaman")
                     println(
-                        "Pengelola Halaman: ID_TANAMAN = $idTanaman"
+                        "Pengelola Halaman: ID_TANAMAN = $id_tanaman"
                     )
                 },
                 onAddTanaman = {
@@ -77,10 +77,10 @@ fun PengelolaHalaman(
             arguments = listOf(navArgument(AlamatDetailTanaman.ID_TANAMAN) {
             type = NavType.StringType })
         ){
-            val idTanaman = it.arguments?.getString(AlamatDetailTanaman.ID_TANAMAN)
-            idTanaman?.let { idTanaman ->
+            val id_tanaman = it.arguments?.getString(AlamatDetailTanaman.ID_TANAMAN)
+            id_tanaman?.let { id_tanaman ->
                 TanamanDetailScreen(
-                    onUpdateButton = { navController.navigate("${AlamatDetailTanaman.route}/$idTanaman") },
+                    onUpdateButton = { navController.navigate("${AlamatDetailTanaman.route}/$id_tanaman") },
                     navigateBack = { navController.navigate(AlamatHomeTanaman.route) {
                         popUpTo(AlamatHomeTanaman.route) { inclusive = true }
                     }
@@ -92,8 +92,8 @@ fun PengelolaHalaman(
                 arguments = listOf(navArgument(AlamatDetailTanaman.ID_TANAMAN){
             type = NavType.StringType })
         ){
-            val idTanaman = it.arguments?.getString(AlamatUpdateTanaman.ID_TANAMAN)
-            idTanaman?.let { idTanaman ->
+            val id_tanaman = it.arguments?.getString(AlamatUpdateTanaman.ID_TANAMAN)
+            id_tanaman?.let { id_tanaman ->
                 TanamanUpdateScreen(
                     onBack = { navController.popBackStack() },
                     onNavigate = { navController.popBackStack() }
