@@ -8,9 +8,9 @@ import okio.IOException
 interface AktivitasPertanianRepository {
     suspend fun getAktivitasPertanian(): AllAktivitasPertanianResponse
     suspend fun insertAktivitasPertanian(aktivitasPertanian: AktivitasPertanian)
-    suspend fun updateAktivitasPertanian(idAktivitas: String, aktivitasPertanian: AktivitasPertanian)
-    suspend fun deleteAktivitasPertanian(idAktivitas: String)
-    suspend fun getAktivitasPertanianById(idAktivitas: String): AktivitasPertanian
+    suspend fun updateAktivitasPertanian(id_aktivitas: String, aktivitasPertanian: AktivitasPertanian)
+    suspend fun deleteAktivitasPertanian(id_aktivitas: String)
+    suspend fun getAktivitasPertanianById(id_aktivitas: String): AktivitasPertanian
 }
 
 class NetworkAktivitasPertanianRepository(
@@ -21,13 +21,13 @@ class NetworkAktivitasPertanianRepository(
         aktivitasPertanianApiService.insertAktivitas(aktivitasPertanian)
     }
 
-    override suspend fun updateAktivitasPertanian(idAktivitas: String, aktivitasPertanian: AktivitasPertanian) {
-        aktivitasPertanianApiService.updateAktivitas(idAktivitas, aktivitasPertanian)
+    override suspend fun updateAktivitasPertanian(id_aktivitas: String, aktivitasPertanian: AktivitasPertanian) {
+        aktivitasPertanianApiService.updateAktivitas(id_aktivitas, aktivitasPertanian)
     }
 
-    override suspend fun deleteAktivitasPertanian(idAktivitas: String) {
+    override suspend fun deleteAktivitasPertanian(id_aktivitas: String) {
         try {
-            val response = aktivitasPertanianApiService.deleteAktivitas(idAktivitas)
+            val response = aktivitasPertanianApiService.deleteAktivitas(id_aktivitas)
             if (!response.isSuccessful) {
                 throw IOException("Failed to delete Aktivitas Pertanian. HTTP Status code: " +
                         "${response.code()}")
@@ -43,7 +43,7 @@ class NetworkAktivitasPertanianRepository(
     override suspend fun getAktivitasPertanian(): AllAktivitasPertanianResponse =
         aktivitasPertanianApiService.getAllAktivitas()
 
-    override suspend fun getAktivitasPertanianById(idAktivitas: String): AktivitasPertanian {
-        return aktivitasPertanianApiService.getAktivitasById(idAktivitas).data
+    override suspend fun getAktivitasPertanianById(id_aktivitas: String): AktivitasPertanian {
+        return aktivitasPertanianApiService.getAktivitasById(id_aktivitas).data
     }
 }
