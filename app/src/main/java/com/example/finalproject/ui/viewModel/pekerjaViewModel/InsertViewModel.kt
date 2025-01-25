@@ -40,10 +40,10 @@ data class InsertUiEvent(
 )
 
 fun InsertUiEvent.toPekerja(): Pekerja = Pekerja(
-    idPekerja = idPekerja,
-    namaPekerja = namaPekerja,
+    id_pekerja = idPekerja,
+    nama_pekerja = namaPekerja,
     jabatan = jabatan,
-    kontakPekerja = kontakPekerja,
+    kontak_pekerja = kontakPekerja,
 )
 
 fun Pekerja.toUiStatePekerja(): InsertUiState = InsertUiState(
@@ -51,8 +51,8 @@ fun Pekerja.toUiStatePekerja(): InsertUiState = InsertUiState(
 )
 
 fun Pekerja.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
-    idPekerja = idPekerja,
-    namaPekerja = namaPekerja,
+    idPekerja = id_pekerja,
+    namaPekerja = nama_pekerja,
     jabatan = jabatan,
-    kontakPekerja = kontakPekerja,
+    kontakPekerja = kontak_pekerja,
 )

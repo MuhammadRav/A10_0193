@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 interface TanamanService {
     @Headers(
@@ -21,14 +21,14 @@ interface TanamanService {
     suspend fun getAllTanaman(): AllTanamanResponse
 
     @GET("tanaman/{id_tanaman}")
-    suspend fun getTanamanById(@Query("id_tanaman") idTanaman: String): TanamanDetailResponse
+    suspend fun getTanamanById(@Path("id_tanaman") idTanaman: String): TanamanDetailResponse
 
     @POST("tanaman_store")
     suspend fun insertTanaman(@Body tanaman: Tanaman)
 
     @PUT("tanaman_store/{id_tanaman}")
-    suspend fun updateTanaman(@Query("id_tanaman") idTanaman: String, @Body tanaman: Tanaman)
+    suspend fun updateTanaman(@Path("id_tanaman") idTanaman: String, @Body tanaman: Tanaman)
 
     @DELETE("tanaman_store/{id_tanaman}")
-    suspend fun deleteTanaman(@Query("id_tanaman") idTanaman: String): retrofit2.Response<Void>
+    suspend fun deleteTanaman(@Path("id_tanaman") idTanaman: String): retrofit2.Response<Void>
 }

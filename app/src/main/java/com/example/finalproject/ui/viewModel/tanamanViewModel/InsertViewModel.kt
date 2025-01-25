@@ -40,10 +40,10 @@ data class InsertUiEvent(
 )
 
 fun InsertUiEvent.toTanaman(): Tanaman = Tanaman(
-    idTanaman = idTanaman,
-    namaTanaman = namaTanaman,
-    periodeTanam = periodeTanam,
-    deskripsiTanaman = deskripsiTanaman,
+    id_tanaman = idTanaman,
+    nama_tanaman = namaTanaman,
+    periode_tanam = periodeTanam,
+    deskripsi_tanaman = deskripsiTanaman,
 )
 
 fun Tanaman.toUiStateTanaman(): InsertUiState = InsertUiState(
@@ -51,8 +51,8 @@ fun Tanaman.toUiStateTanaman(): InsertUiState = InsertUiState(
 )
 
 fun Tanaman.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
-    idTanaman = idTanaman,
-    namaTanaman = namaTanaman,
-    periodeTanam = periodeTanam,
-    deskripsiTanaman = deskripsiTanaman,
+    idTanaman = id_tanaman,
+    namaTanaman = nama_tanaman,
+    periodeTanam = periode_tanam,
+    deskripsiTanaman = deskripsi_tanaman,
 )

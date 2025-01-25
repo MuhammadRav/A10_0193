@@ -76,7 +76,7 @@ fun TanamanDetailScreen(
             retryAction = { viewModel.getTanamanById() },
             onDeleteClick = {
                 viewModel.deleteTanaman(viewModel.tanamanDetailState.let { state ->
-                    if (state is DetailUiState.Success) state.tanaman.idTanaman else ""
+                    if (state is DetailUiState.Success) state.tanaman.id_tanaman else ""
                 })
                 navigateBack()
             }
@@ -95,7 +95,7 @@ fun TanamanDetailStatus(
     when (detailUiState) {
         is DetailUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
         is DetailUiState.Success -> {
-            if (detailUiState.tanaman.idTanaman.isEmpty()) {
+            if (detailUiState.tanaman.id_tanaman.isEmpty()) {
                 Box(
                     modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center
                 ) { Text("Data tidak ditemukan") }
@@ -127,13 +127,13 @@ fun ItemDetailTanaman(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            ComponentDetailTanaman(judul = "ID Tanaman", isinya = tanaman.idTanaman)
+            ComponentDetailTanaman(judul = "ID Tanaman", isinya = tanaman.id_tanaman)
             Divider(modifier = Modifier.padding(vertical = 8.dp))
-            ComponentDetailTanaman(judul = "Nama Tanaman", isinya = tanaman.namaTanaman)
+            ComponentDetailTanaman(judul = "Nama Tanaman", isinya = tanaman.nama_tanaman)
             Divider(modifier = Modifier.padding(vertical = 8.dp))
-            ComponentDetailTanaman(judul = "Periode Tanam", isinya = tanaman.periodeTanam)
+            ComponentDetailTanaman(judul = "Periode Tanam", isinya = tanaman.periode_tanam)
             Divider(modifier = Modifier.padding(vertical = 8.dp))
-            ComponentDetailTanaman(judul = "Deskripsi", isinya = tanaman.deskripsiTanaman)
+            ComponentDetailTanaman(judul = "Deskripsi", isinya = tanaman.deskripsi_tanaman)
             Divider(modifier = Modifier.padding(vertical = 8.dp))
 
             Spacer(modifier = Modifier.padding(8.dp))

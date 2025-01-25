@@ -82,7 +82,7 @@ fun PekerjaHomeScreen(
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                viewModel.deletePekerja(it.idPekerja)
+                viewModel.deletePekerja(it.id_pekerja)
                 viewModel.getPekerja()
             }
         )
@@ -111,7 +111,7 @@ fun PekerjaHomeStatus(
                     pekerja = homeUiState.pekerja,
                     modifier = modifier.fillMaxWidth(),
                     onDetailClick = {
-                        onDetailClick(it.idPekerja)
+                        onDetailClick(it.id_pekerja)
                     },
                     onDeleteClick = {
                         onDeleteClick(it)
@@ -200,7 +200,7 @@ fun PekerjaCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = pekerja.namaPekerja,
+                    text = pekerja.nama_pekerja,
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))
@@ -211,7 +211,7 @@ fun PekerjaCard(
                     )
                 }
                 Text(
-                    text = pekerja.idPekerja,
+                    text = pekerja.id_pekerja,
                     style = MaterialTheme.typography.titleMedium,
                 )
             }
@@ -220,7 +220,7 @@ fun PekerjaCard(
                 style = MaterialTheme.typography.titleMedium,
             )
             Text(
-                text = pekerja.kontakPekerja,
+                text = pekerja.kontak_pekerja,
                 style = MaterialTheme.typography.titleMedium,
             )
         }

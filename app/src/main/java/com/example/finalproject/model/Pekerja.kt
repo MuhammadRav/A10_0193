@@ -4,10 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Pekerja(
-    val idPekerja: String,
-    val namaPekerja: String,
+    val id_pekerja: String,
+    val nama_pekerja: String,
     val jabatan : String,
-    val kontakPekerja: String
+    val kontak_pekerja: String
 )
 
 @Serializable

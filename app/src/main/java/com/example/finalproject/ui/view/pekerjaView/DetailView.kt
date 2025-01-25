@@ -77,7 +77,7 @@ fun PekerjaDetailScreen(
             retryAction = { viewModel.getPekerjaById() },
             onDeleteClick = {
                 viewModel.deletePekerja(viewModel.pekerjaDetailState.let { state ->
-                    if (state is DetailUiState.Success) state.pekerja.idPekerja else ""
+                    if (state is DetailUiState.Success) state.pekerja.id_pekerja else ""
                 })
                 navigateBack()
             }
@@ -96,7 +96,7 @@ fun PekerjaDetailStatus(
     when (detailUiState) {
         is DetailUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
         is DetailUiState.Success -> {
-            if (detailUiState.pekerja.idPekerja.isEmpty()) {
+            if (detailUiState.pekerja.id_pekerja.isEmpty()) {
                 Box(
                     modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center
                 ) { Text("Data tidak ditemukan") }
@@ -131,13 +131,13 @@ fun ItemDetailPekerja(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            ComponentDetailPekerja(judul = "ID Pekerja", isinya = pekerja.idPekerja)
+            ComponentDetailPekerja(judul = "ID Pekerja", isinya = pekerja.id_pekerja)
             Divider(modifier = Modifier.padding(vertical = 8.dp))
-            ComponentDetailPekerja(judul = "Nama Pekerja", isinya = pekerja.namaPekerja)
+            ComponentDetailPekerja(judul = "Nama Pekerja", isinya = pekerja.nama_pekerja)
             Divider(modifier = Modifier.padding(vertical = 8.dp))
             ComponentDetailPekerja(judul = "Jabatan", isinya = pekerja.jabatan)
             Divider(modifier = Modifier.padding(vertical = 8.dp))
-            ComponentDetailPekerja(judul = "Kontak Pekerja", isinya = pekerja.kontakPekerja)
+            ComponentDetailPekerja(judul = "Kontak Pekerja", isinya = pekerja.kontak_pekerja)
             Divider(modifier = Modifier.padding(vertical = 8.dp))
 
             Spacer(modifier = Modifier.padding(8.dp))

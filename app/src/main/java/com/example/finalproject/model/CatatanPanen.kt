@@ -6,11 +6,11 @@ import java.util.Date
 
 @Serializable
 data class CatatanPanen(
-    val idPanen: String,
-    val idTanaman: String,
+    val id_panen: String,
+    val id_tanaman: String,
     @Contextual
-    val tanggalPanen: Date,
-    val jumlahPanen: String,
+    val tanggal_panen: Date,
+    val jumlah_panen: String,
     val keterangan: String
 )
 

@@ -4,10 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Tanaman(
-    val idTanaman: String,
-    val namaTanaman: String,
-    val periodeTanam : String,
-    val deskripsiTanaman: String
+    val id_tanaman: String,
+    val nama_tanaman: String,
+    val periode_tanam : String,
+    val deskripsi_tanaman: String
     )
 
 @Serializable

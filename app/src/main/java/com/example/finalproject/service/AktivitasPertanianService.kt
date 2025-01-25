@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 interface AktivitasPertanianService {
     @Headers(
@@ -21,14 +21,14 @@ interface AktivitasPertanianService {
     suspend fun getAllAktivitas(): AllAktivitasPertanianResponse
 
     @GET("aktivitaspertanian/{id_aktivitas}")
-    suspend fun getAktivitasById(@Query("id_aktivitas") idAktivitas: String): AktivitasPertanianDetailResponse
+    suspend fun getAktivitasById(@Path("id_aktivitas") idAktivitas: String): AktivitasPertanianDetailResponse
 
     @POST("aktivitaspertanian_store")
     suspend fun insertAktivitas(@Body aktivitasPertanian: AktivitasPertanian)
 
     @PUT("aktivitaspertanian_store/{id_aktivitas}")
-    suspend fun updateAktivitas(@Query("id_aktivitas") idAktivitas: String, @Body aktivitasPertanian: AktivitasPertanian)
+    suspend fun updateAktivitas(@Path("id_aktivitas") idAktivitas: String, @Body aktivitasPertanian: AktivitasPertanian)
 
     @DELETE("aktivitaspertanian_store/{id_aktivitas}")
-    suspend fun deleteAktivitas(@Query("id_aktivitas") idAktivitas: String): retrofit2.Response<Void>
+    suspend fun deleteAktivitas(@Path("id_aktivitas") idAktivitas: String): retrofit2.Response<Void>
 }

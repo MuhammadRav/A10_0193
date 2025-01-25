@@ -82,7 +82,7 @@ fun TanamanHomeScreen(
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
             onDeleteClick = {
-                viewModel.deleteTanaman(it.idTanaman)
+                viewModel.deleteTanaman(it.id_tanaman)
                 viewModel.getTanaman()
             }
         )
@@ -111,7 +111,7 @@ fun TanamanHomeStatus(
                     tanaman = homeUiState.tanaman,
                     modifier = modifier.fillMaxWidth(),
                     onDetailClick = {
-                        onDetailClick(it.idTanaman)
+                        onDetailClick(it.id_tanaman)
                     },
                     onDeleteClick = {
                         onDeleteClick(it)
@@ -200,7 +200,7 @@ fun TanamanCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = tanaman.namaTanaman,
+                    text = tanaman.nama_tanaman,
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))
@@ -211,16 +211,16 @@ fun TanamanCard(
                     )
                 }
                 Text(
-                    text = tanaman.idTanaman,
+                    text = tanaman.id_tanaman,
                     style = MaterialTheme.typography.titleMedium,
                 )
             }
             Text(
-                text = tanaman.periodeTanam,
+                text = tanaman.periode_tanam,
                 style = MaterialTheme.typography.titleMedium,
             )
             Text(
-                text = tanaman.deskripsiTanaman,
+                text = tanaman.deskripsi_tanaman,
                 style = MaterialTheme.typography.titleMedium,
             )
         }
