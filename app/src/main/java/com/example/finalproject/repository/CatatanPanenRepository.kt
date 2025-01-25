@@ -8,9 +8,9 @@ import okio.IOException
 interface CatatanPanenRepository {
     suspend fun getCatatanPanen(): AllCatatanPanenResponse
     suspend fun insertCatatanPanen(catatanPanen: CatatanPanen)
-    suspend fun updateCatatanPanen(idPanen: String, catatanPanen: CatatanPanen)
-    suspend fun deleteCatatanPanen(idPanen: String)
-    suspend fun getCatatanPanenById(idPanen: String): CatatanPanen
+    suspend fun updateCatatanPanen(id_panen: String, catatanPanen: CatatanPanen)
+    suspend fun deleteCatatanPanen(id_panen: String)
+    suspend fun getCatatanPanenById(id_panen: String): CatatanPanen
 }
 
 class NetworkCatatanPanenRepository(
@@ -21,13 +21,13 @@ class NetworkCatatanPanenRepository(
         catatanPanenApiService.insertCatatanPanen(catatanPanen)
     }
 
-    override suspend fun updateCatatanPanen(idPanen: String, catatanPanen: CatatanPanen) {
-        catatanPanenApiService.updateCatatanPanen(idPanen, catatanPanen)
+    override suspend fun updateCatatanPanen(id_panen: String, catatanPanen: CatatanPanen) {
+        catatanPanenApiService.updateCatatanPanen(id_panen, catatanPanen)
     }
 
-    override suspend fun deleteCatatanPanen(idPanen: String) {
+    override suspend fun deleteCatatanPanen(id_panen: String) {
         try {
-            val response = catatanPanenApiService.deleteCatatanPanen(idPanen)
+            val response = catatanPanenApiService.deleteCatatanPanen(id_panen)
             if (!response.isSuccessful) {
                 throw IOException("Failed to delete Catatan Panen. HTTP Status code: " +
                         "${response.code()}")
@@ -43,7 +43,7 @@ class NetworkCatatanPanenRepository(
     override suspend fun getCatatanPanen(): AllCatatanPanenResponse =
         catatanPanenApiService.getAllCatatanPanen()
 
-    override suspend fun getCatatanPanenById(idPanen: String): CatatanPanen {
-        return catatanPanenApiService.getCatatanPanenById(idPanen).data
+    override suspend fun getCatatanPanenById(id_panen: String): CatatanPanen {
+        return catatanPanenApiService.getCatatanPanenById(id_panen).data
     }
 }
