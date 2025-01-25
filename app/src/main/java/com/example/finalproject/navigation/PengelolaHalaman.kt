@@ -9,6 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.finalproject.ui.view.Utama
+import com.example.finalproject.ui.view.aktivitasPertanianView.AktivitasPertanianDetailScreen
+import com.example.finalproject.ui.view.aktivitasPertanianView.AktivitasPertanianHomeScreen
+import com.example.finalproject.ui.view.aktivitasPertanianView.AktivitasPertanianInsertScreen
+import com.example.finalproject.ui.view.aktivitasPertanianView.AktivitasPertanianUpdateScreen
 import com.example.finalproject.ui.view.catatanPanenView.CatatanPanenDetailScreen
 import com.example.finalproject.ui.view.catatanPanenView.CatatanPanenHomeScreen
 import com.example.finalproject.ui.view.catatanPanenView.CatatanPanenInsertScreen
@@ -211,6 +215,62 @@ fun PengelolaHalaman(
             val id_panen = it.arguments?.getString(AlamatUpdateCatatan.ID_PANEN)
             id_panen?.let { id_panen ->
                 CatatanPanenUpdateScreen(
+                    onBack = { navController.popBackStack() },
+                    onNavigate = { navController.popBackStack() }
+                )
+            }
+        }
+
+        // Aktivitas Pertanian
+        composable(
+            route = AlamatHomeAktivitas.route
+        ){
+            AktivitasPertanianHomeScreen(
+                onDetailClick = { id_aktivitas ->
+                    navController.navigate("${AlamatDetailAktivitas.route}/$id_aktivitas")
+                    println(
+                        "Pengelola Halaman: ID_AKTIVITAS = $id_aktivitas"
+                    )
+                },
+                onAddAktivitas = {
+                    navController.navigate(AlamatInsertAktivitas.route)
+                },
+                modifier = modifier
+            )
+        }
+        composable(
+            route = AlamatInsertAktivitas.route
+        ){
+            AktivitasPertanianInsertScreen(navigateBack = {
+                navController.navigate(AlamatHomeAktivitas.route){
+                    popUpTo(AlamatHomeAktivitas.route){
+                        inclusive = true
+                    }
+                }
+            })
+        }
+        composable(AlamatDetailAktivitas.routesWithArg,
+            arguments = listOf(navArgument(AlamatDetailAktivitas.ID_AKTIVITAS) {
+                type = NavType.StringType })
+        ){
+            val id_aktivitas = it.arguments?.getString(AlamatDetailAktivitas.ID_AKTIVITAS)
+            id_aktivitas?.let { id_aktivitas ->
+                AktivitasPertanianDetailScreen(
+                    onUpdateButton = { navController.navigate("${AlamatUpdateAktivitas.route}/$id_aktivitas") },
+                    navigateBack = { navController.navigate(AlamatHomeAktivitas.route) {
+                        popUpTo(AlamatHomeAktivitas.route) { inclusive = true }
+                    }
+                    }
+                )
+            }
+        }
+        composable(AlamatUpdateAktivitas.routesWithArg,
+            arguments = listOf(navArgument(AlamatDetailAktivitas.ID_AKTIVITAS){
+                type = NavType.StringType })
+        ){
+            val id_aktivitas = it.arguments?.getString(AlamatUpdateAktivitas.ID_AKTIVITAS)
+            id_aktivitas?.let { id_aktivitas ->
+                AktivitasPertanianUpdateScreen(
                     onBack = { navController.popBackStack() },
                     onNavigate = { navController.popBackStack() }
                 )

@@ -21,14 +21,14 @@ interface AktivitasPertanianService {
     suspend fun getAllAktivitas(): AllAktivitasPertanianResponse
 
     @GET("aktivitaspertanian/{id_aktivitas}")
-    suspend fun getAktivitasById(@Path("id_aktivitas") idAktivitas: String): AktivitasPertanianDetailResponse
+    suspend fun getAktivitasById(@Path("id_aktivitas") id_aktivitas: String): AktivitasPertanianDetailResponse
 
-    @POST("aktivitaspertanianaktivitaspertanian_store")
+    @POST("aktivitaspertanian/aktivitaspertanian_store")
     suspend fun insertAktivitas(@Body aktivitasPertanian: AktivitasPertanian)
 
     @PUT("aktivitaspertanian/{id_aktivitas}")
-    suspend fun updateAktivitas(@Path("id_aktivitas") idAktivitas: String, @Body aktivitasPertanian: AktivitasPertanian)
+    suspend fun updateAktivitas(@Path("id_aktivitas") id_aktivitas: String, @Body aktivitasPertanian: AktivitasPertanian)
 
     @DELETE("aktivitaspertanian/{id_aktivitas}")
-    suspend fun deleteAktivitas(@Path("id_aktivitas") idAktivitas: String): retrofit2.Response<Void>
+    suspend fun deleteAktivitas(@Path("id_aktivitas") id_aktivitas: String): retrofit2.Response<Void>
 }
