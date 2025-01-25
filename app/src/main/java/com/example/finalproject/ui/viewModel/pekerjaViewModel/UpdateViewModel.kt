@@ -29,7 +29,7 @@ class PekerjaUpdateViewModel(
         UpdateUiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
-    suspend fun updatePekerja(){
+    fun updatePekerja(){
         viewModelScope.launch {
             try {
                 pkj.updatePekerja(_id_pekerja, UpdateUiState.insertUiEvent.toPekerja())

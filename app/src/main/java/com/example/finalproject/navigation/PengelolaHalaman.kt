@@ -80,7 +80,7 @@ fun PengelolaHalaman(
             val id_tanaman = it.arguments?.getString(AlamatDetailTanaman.ID_TANAMAN)
             id_tanaman?.let { id_tanaman ->
                 TanamanDetailScreen(
-                    onUpdateButton = { navController.navigate("${AlamatDetailTanaman.route}/$id_tanaman") },
+                    onUpdateButton = { navController.navigate("${AlamatUpdateTanaman.route}/$id_tanaman") },
                     navigateBack = { navController.navigate(AlamatHomeTanaman.route) {
                         popUpTo(AlamatHomeTanaman.route) { inclusive = true }
                     }
@@ -106,10 +106,10 @@ fun PengelolaHalaman(
             route = AlamatHomePekerja.route
         ){
             PekerjaHomeScreen(
-                onDetailClick = { idPekerja ->
-                    navController.navigate("${AlamatDetailPekerja.route}/$idPekerja")
+                onDetailClick = { id_pekerja ->
+                    navController.navigate("${AlamatDetailPekerja.route}/$id_pekerja")
                     println(
-                        "Pengelola Halaman: ID_PEKERJA = $idPekerja"
+                        "Pengelola Halaman: ID_PEKERJA = $id_pekerja"
                     )
                 },
                 onAddPekerja = {
@@ -133,10 +133,10 @@ fun PengelolaHalaman(
             arguments = listOf(navArgument(AlamatDetailPekerja.ID_PEKERJA) {
                 type = NavType.StringType })
         ){
-            val idPekerja = it.arguments?.getString(AlamatDetailPekerja.ID_PEKERJA)
-            idPekerja?.let { idPekerja ->
+            val id_pekerja = it.arguments?.getString(AlamatDetailPekerja.ID_PEKERJA)
+            id_pekerja?.let { id_pekerja ->
                 PekerjaDetailScreen(
-                    onUpdateButton = { navController.navigate("${AlamatDetailPekerja.route}/$idPekerja") },
+                    onUpdateButton = { navController.navigate("${AlamatUpdatePekerja.route}/$id_pekerja") },
                     navigateBack = { navController.navigate(AlamatHomePekerja.route) {
                         popUpTo(AlamatHomePekerja.route) { inclusive = true }
                     }
@@ -148,8 +148,8 @@ fun PengelolaHalaman(
             arguments = listOf(navArgument(AlamatDetailPekerja.ID_PEKERJA){
                 type = NavType.StringType })
         ){
-            val idPekerja = it.arguments?.getString(AlamatUpdatePekerja.ID_PEKERJA)
-            idPekerja?.let { idPekerja ->
+            val id_pekerja = it.arguments?.getString(AlamatUpdatePekerja.ID_PEKERJA)
+            id_pekerja?.let { id_pekerja ->
                 PekerjaUpdateScreen(
                     onBack = { navController.popBackStack() },
                     onNavigate = { navController.popBackStack() }
