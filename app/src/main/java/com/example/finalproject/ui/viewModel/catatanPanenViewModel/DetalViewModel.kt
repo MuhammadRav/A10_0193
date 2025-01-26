@@ -23,7 +23,6 @@ class CatatanPanenDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val ctp: CatatanPanenRepository
 ) : ViewModel() {
-
     var catatanPanenDetailState: DetailUiState by mutableStateOf(DetailUiState.Loading)
         private set
 
