@@ -23,9 +23,8 @@ class CatatanPanenUpdateViewModel(
     var UpdateUiState by mutableStateOf(InsertUiState())
         private set
 
-    // Menggunakan MutableStateFlow untuk _tanamanList
     private val _tanamanList = MutableStateFlow<List<Tanaman>>(emptyList())
-    val tanamanList: StateFlow<List<Tanaman>> get() = _tanamanList // Mengakses _tanamanList sebagai StateFlow
+    val tanamanList: StateFlow<List<Tanaman>> get() = _tanamanList
 
     private val _id_panen: String = checkNotNull(savedStateHandle[AlamatUpdateCatatan.ID_PANEN])
 
@@ -55,9 +54,9 @@ class CatatanPanenUpdateViewModel(
         viewModelScope.launch {
             try {
                 val tnmData = tnm.getTanaman()
-                _tanamanList.value = tnmData.data // Mengubah nilai _tanamanList menggunakan .value
+                _tanamanList.value = tnmData.data
             } catch (e: Exception) {
-                _tanamanList.value = emptyList() // Menetapkan nilai kosong jika ada error
+                _tanamanList.value = emptyList()
             }
         }
     }

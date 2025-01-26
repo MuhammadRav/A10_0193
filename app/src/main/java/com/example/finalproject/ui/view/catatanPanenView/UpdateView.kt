@@ -30,7 +30,6 @@ fun CatatanPanenUpdateScreen(
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    // Menggunakan collectAsState untuk mendapatkan nilai tanamanList secara reaktif
     val tanamanList = viewModel.tanamanList.collectAsState().value
 
     Scaffold(
@@ -58,7 +57,7 @@ fun CatatanPanenUpdateScreen(
                     }
                 }
             },
-            tanamanList = tanamanList // Meneruskan tanamanList yang sudah di-observe
+            tanamanList = tanamanList
         )
     }
 }

@@ -17,25 +17,20 @@ class CatatanPanenInsertViewModel(
     private val ctp: CatatanPanenRepository,
     private val tnm: TanamanRepository
 ) : ViewModel() {
-    // State untuk UI form
     var uiState by mutableStateOf(InsertUiState())
         private set
 
-    // State untuk daftar tanaman (menggunakan StateFlow)
     private val _tanamanList = MutableStateFlow<List<Tanaman>>(emptyList())
     val tanamanList: StateFlow<List<Tanaman>> = _tanamanList
 
-    // Inisialisasi dengan mengambil data tanaman
     init {
         getTanaman()
     }
 
-    // Memperbarui state UI berdasarkan input pengguna
     fun updateInsertCatatanPanenState(insertUiEvent: InsertUiEvent) {
         uiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
-    // Fungsi untuk menambahkan catatan panen
     fun insertCatatanPanen() {
         viewModelScope.launch {
             try {
@@ -46,7 +41,6 @@ class CatatanPanenInsertViewModel(
         }
     }
 
-    // Fungsi untuk mengambil data tanaman dari repository
     private fun getTanaman() {
         viewModelScope.launch {
             try {
@@ -59,12 +53,10 @@ class CatatanPanenInsertViewModel(
     }
 }
 
-// Data class untuk state UI form
 data class InsertUiState(
     val insertUiEvent: InsertUiEvent = InsertUiEvent()
 )
 
-// Data class untuk event input pengguna
 data class InsertUiEvent(
     val id_panen: String = "",
     val id_tanaman: String = "",
@@ -73,7 +65,6 @@ data class InsertUiEvent(
     val keterangan: String = "",
 )
 
-// Fungsi untuk mengonversi InsertUiEvent menjadi model CatatanPanen
 fun InsertUiEvent.toCatatanPanen(): CatatanPanen = CatatanPanen(
     id_panen = id_panen,
     id_tanaman = id_tanaman,
@@ -82,12 +73,10 @@ fun InsertUiEvent.toCatatanPanen(): CatatanPanen = CatatanPanen(
     keterangan = keterangan
 )
 
-// Fungsi untuk mengonversi CatatanPanen menjadi InsertUiState
 fun CatatanPanen.toUiStateCatatanPanen(): InsertUiState = InsertUiState(
     insertUiEvent = toInsertUiEvent()
 )
 
-// Fungsi untuk mengonversi CatatanPanen menjadi InsertUiEvent
 fun CatatanPanen.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
     id_panen = id_panen,
     id_tanaman = id_tanaman,

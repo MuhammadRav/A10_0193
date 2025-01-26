@@ -22,6 +22,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.finalproject.customWidget.CstTopAppBar
+import com.example.finalproject.model.Pekerja
 import com.example.finalproject.model.Tanaman
 import com.example.finalproject.navigation.AlamatInsertAktivitas
 import com.example.finalproject.ui.viewModel.aktivitasPertanianViewModel.AktivitasPertanianInsertViewModel
@@ -39,7 +41,6 @@ import com.example.finalproject.ui.viewModel.aktivitasPertanianViewModel.InsertU
 import com.example.finalproject.ui.viewModel.aktivitasPertanianViewModel.InsertUiState
 import com.example.finalproject.ui.viewModel.aktivitasPertanianViewModel.PenyediaAktivitasPertanianViewModel
 import kotlinx.coroutines.launch
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,6 +51,9 @@ fun AktivitasPertanianInsertScreen(
 ){
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val tanamanList by viewModel.tanamanList.collectAsState()
+    val pekerjaList by viewModel.pekerjaList.collectAsState()
+
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -63,6 +67,8 @@ fun AktivitasPertanianInsertScreen(
     ){ innerPadding ->
         InsertBody(
             insertUiState = viewModel.uiState,
+            tanamanList = tanamanList,
+            pekerjaList = pekerjaList,
             onAktivitasPertanianValueChange = viewModel::updateInsertAktivitasPertanianState,
             onSaveClick = {
                 coroutineScope.launch {
@@ -81,6 +87,8 @@ fun AktivitasPertanianInsertScreen(
 @Composable
 fun InsertBody(
     insertUiState: InsertUiState,
+    tanamanList: List<Tanaman>,
+    pekerjaList: List<Pekerja>,
     onAktivitasPertanianValueChange: (InsertUiEvent) -> Unit,
     onSaveClick: ()->Unit,
     modifier: Modifier = Modifier
@@ -91,7 +99,8 @@ fun InsertBody(
     ){
         FormInput(
             insertUiEvent = insertUiState.insertUiEvent,
-//            tnmList = insertUiState.tnmList,
+            tanamanList = tanamanList,
+            pekerjaList = pekerjaList,
             onValueChange = onAktivitasPertanianValueChange,
             modifier = Modifier.fillMaxWidth()
         )
@@ -109,7 +118,8 @@ fun InsertBody(
 @Composable
 fun FormInput(
     insertUiEvent: InsertUiEvent,
-//    tnmList: List<Tanaman>,
+    tanamanList: List<Tanaman>,
+    pekerjaList: List<Pekerja>,
     modifier: Modifier = Modifier,
     onValueChange: (InsertUiEvent)->Unit={},
     enabled: Boolean = true
@@ -126,29 +136,37 @@ fun FormInput(
             enabled = enabled,
             singleLine = true
         )
-        OutlinedTextField(
-            value = insertUiEvent.id_tanaman,
-            onValueChange = { onValueChange(insertUiEvent.copy(id_tanaman = it))},
-            label = { Text("ID Tanaman") },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            singleLine = true
-        )
-//        DropdownMenuTanaman(
-//            selectedTanaman = insertUiEvent.id_tanaman,
-//            tnmList = tnmList,
-//            onItemSelected = { selectedTanaman ->
-//                onValueChange(insertUiEvent.copy(id_tanaman = selectedTanaman))
-//            },
-//            enabled = enabled
+//        OutlinedTextField(
+//            value = insertUiEvent.id_tanaman,
+//            onValueChange = { onValueChange(insertUiEvent.copy(id_tanaman = it))},
+//            label = { Text("ID Tanaman") },
+//            modifier = Modifier.fillMaxWidth(),
+//            enabled = enabled,
+//            singleLine = true
 //        )
-        OutlinedTextField(
-            value = insertUiEvent.id_pekerja,
-            onValueChange = {onValueChange(insertUiEvent.copy(id_pekerja = it))},
-            label = { Text("ID Pekrja") },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = enabled,
-            singleLine = true
+        DropdownMenuTanaman(
+            selectedTanaman = insertUiEvent.id_tanaman,
+            tnmList = tanamanList,
+            onItemSelected = { selectedTanaman ->
+                onValueChange(insertUiEvent.copy(id_tanaman = selectedTanaman))
+            },
+            enabled = enabled
+        )
+//        OutlinedTextField(
+//            value = insertUiEvent.id_pekerja,
+//            onValueChange = {onValueChange(insertUiEvent.copy(id_pekerja = it))},
+//            label = { Text("ID Pekrja") },
+//            modifier = Modifier.fillMaxWidth(),
+//            enabled = enabled,
+//            singleLine = true
+//        )
+        DropdownMenuPekerja(
+            selectedPekerja = insertUiEvent.id_pekerja,
+            pkjList = pekerjaList,
+            onItemSelected = { selectedPekerja ->
+                onValueChange(insertUiEvent.copy(id_pekerja = selectedPekerja))
+            },
+            enabled = enabled
         )
         OutlinedTextField(
             value = insertUiEvent.tanggal_aktivitas,
@@ -179,47 +197,82 @@ fun FormInput(
     }
 }
 
-//@Composable
-//fun DropdownMenuTanaman(
-//    selectedTanaman: String,
-//    tnmList: List<Tanaman>,
-//    onItemSelected: (String) -> Unit,
-//    enabled: Boolean
-//) {
-//    var expanded by remember { mutableStateOf(false) }
-//
-//    OutlinedTextField(
-//        value = selectedTanaman,
-//        onValueChange = { },
-//        label = { Text("ID Tanaman") },
-//        modifier = Modifier.fillMaxWidth(),
-//        enabled = enabled,
-//        singleLine = true,
-//        readOnly = true,
-//        trailingIcon = {
-//            IconButton(
-//                onClick = { expanded = !expanded },
-//                interactionSource = remember {
-//                    MutableInteractionSource() }
-//            ) {
-//                Icon(Icons.Default.ArrowDropDown, contentDescription = null)
-//            }
-//        }
-//    )
-//
-//    DropdownMenu(
-//        expanded = expanded,
-//        onDismissRequest = { expanded = false }
-//    ) {
-//        tnmList.forEach { tanaman ->
-//            DropdownMenuItem(
-//                onClick = {
-//                    onItemSelected(tanaman.id_tanaman)
-//                    expanded = false
-//                }
-//            ) {
-//                Text(text = tanaman.id_tanaman)
-//            }
-//        }
-//    }
-//}
+@Composable
+fun DropdownMenuTanaman(
+    selectedTanaman: String,
+    tnmList: List<Tanaman>,
+    onItemSelected: (String) -> Unit,
+    enabled: Boolean
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    OutlinedTextField(
+        value = selectedTanaman,
+        onValueChange = { },
+        label = { Text("Pilih ID Tanaman") },
+        modifier = Modifier.fillMaxWidth(),
+        enabled = enabled,
+        singleLine = true,
+        readOnly = true,
+        trailingIcon = {
+            IconButton(onClick = { expanded = !expanded }) {
+                Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown")
+            }
+        }
+    )
+
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { expanded = false }
+    ) {
+        tnmList.forEach { tanaman ->
+            DropdownMenuItem(
+                text = { Text(tanaman.id_tanaman) },
+                onClick = {
+                    onItemSelected(tanaman.id_tanaman)
+                    expanded = false
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun DropdownMenuPekerja(
+    selectedPekerja: String,
+    pkjList: List<Pekerja>,
+    onItemSelected: (String) -> Unit,
+    enabled: Boolean
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    OutlinedTextField(
+        value = selectedPekerja,
+        onValueChange = { },
+        label = { Text("Pilih ID Pekerja") },
+        modifier = Modifier.fillMaxWidth(),
+        enabled = enabled,
+        singleLine = true,
+        readOnly = true,
+        trailingIcon = {
+            IconButton(onClick = { expanded = !expanded }) {
+                Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown")
+            }
+        }
+    )
+
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { expanded = false }
+    ) {
+        pkjList.forEach { tanaman ->
+            DropdownMenuItem(
+                text = { Text(tanaman.id_pekerja) },
+                onClick = {
+                    onItemSelected(tanaman.id_pekerja)
+                    expanded = false
+                }
+            )
+        }
+    }
+}

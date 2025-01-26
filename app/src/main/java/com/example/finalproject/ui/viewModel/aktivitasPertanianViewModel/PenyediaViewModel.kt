@@ -18,7 +18,10 @@ object PenyediaAktivitasPertanianViewModel {
         initializer {
             AktivitasPertanianInsertViewModel(
                 aplikasiAktivitasPertanian().container.aktivitasPertanianRepository,
-//                aplikasiCatatanPanen().container.tanamanRepository
+                aplikasiAktivitasPertanian().container.tanamanRepository,
+                aplikasiAktivitasPertanian().container.pekerjaRepository
+
+
             )
         }
 
@@ -33,7 +36,8 @@ object PenyediaAktivitasPertanianViewModel {
             AktivitasPertanianUpdateViewModel(
                 createSavedStateHandle(),
                 aplikasiAktivitasPertanian().container.aktivitasPertanianRepository,
-//                aplikasiCatatanPanen().container.tanamanRepository
+                aplikasiAktivitasPertanian().container.tanamanRepository,
+                aplikasiAktivitasPertanian().container.pekerjaRepository
             )
         }
     }

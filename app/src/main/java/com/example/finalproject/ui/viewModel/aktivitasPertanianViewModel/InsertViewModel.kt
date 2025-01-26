@@ -6,19 +6,33 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalproject.model.AktivitasPertanian
+import com.example.finalproject.model.Pekerja
 import com.example.finalproject.model.Tanaman
 import com.example.finalproject.repository.AktivitasPertanianRepository
+import com.example.finalproject.repository.PekerjaRepository
 import com.example.finalproject.repository.TanamanRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class AktivitasPertanianInsertViewModel(
     private val akp: AktivitasPertanianRepository,
-//    private val tnm: TanamanRepository,
+    private val tnm: TanamanRepository,
+    private val pkj: PekerjaRepository,
 ): ViewModel(){
     var uiState by mutableStateOf(InsertUiState())
         private set
-//    var tnmlist by mutableStateOf<List<Tanaman>>(emptyList())
-//        private set
+
+    private val _tanamanList = MutableStateFlow<List<Tanaman>>(emptyList())
+    val tanamanList: StateFlow<List<Tanaman>> = _tanamanList
+
+    private val _pekerjaList = MutableStateFlow<List<Pekerja>>(emptyList())
+    val pekerjaList: StateFlow<List<Pekerja>> = _pekerjaList
+
+    init {
+        getTanaman()
+        getPekerja()
+    }
 
     fun updateInsertAktivitasPertanianState(insertUiEvent: InsertUiEvent){
         uiState = InsertUiState(insertUiEvent = insertUiEvent)
@@ -33,21 +47,30 @@ class AktivitasPertanianInsertViewModel(
             }
         }
     }
-//    fun getTanaman() {
-//        viewModelScope.launch {
-//            try {
-//                val tnmData = tnm.getTanaman()
-//                tnmlist = tnmData.data
-//            } catch (e: Exception) {
-//                tnmlist = emptyList()
-//            }
-//        }
-//    }
+    private fun getTanaman() {
+        viewModelScope.launch {
+            try {
+                val tnmData = tnm.getTanaman()
+                _tanamanList.value = tnmData.data
+            } catch (e: Exception) {
+                _tanamanList.value = emptyList()
+            }
+        }
+    }
+    private fun getPekerja() {
+        viewModelScope.launch {
+            try {
+                val pkjData = pkj.getPekerja()
+                _pekerjaList.value = pkjData.data
+            } catch (e: Exception) {
+                _pekerjaList.value = emptyList()
+            }
+        }
+    }
 }
 
 data class InsertUiState(
     val insertUiEvent: InsertUiEvent = InsertUiEvent(),
-//    val tnmList: List<Tanaman> = emptyList()
 )
 
 data class InsertUiEvent(
