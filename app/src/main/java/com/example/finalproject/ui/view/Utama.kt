@@ -32,10 +32,8 @@ import com.example.finalproject.R
 
 @Composable
 fun Utama(
-    onTanamanButton: () -> Unit,
     onPekerjaButton: () -> Unit,
     onAktivitasButton: () -> Unit,
-    onCatatanButton: () -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
@@ -56,13 +54,6 @@ fun Utama(
                 .padding(16.dp)
         ) {
             MenuCard(
-                imageRes = R.drawable.tanam,
-                title = "Tanaman",
-                buttonColor = Color.Green,
-                onClick = onTanamanButton
-            )
-
-            MenuCard(
                 imageRes = R.drawable.pekerja,
                 title = "Pekerja",
                 buttonColor = Color.Green,
@@ -74,13 +65,6 @@ fun Utama(
                 title = "Aktivitas",
                 buttonColor = Color.Green,
                 onClick = onAktivitasButton
-            )
-
-            MenuCard(
-                imageRes = R.drawable.catatan,
-                title = "Catatan",
-                buttonColor = Color.Green,
-                onClick = onCatatanButton
             )
         }
     }
@@ -150,9 +134,7 @@ fun MenuCard(
 @Composable
 fun UtamaPreview() {
     Utama(
-        onTanamanButton = {},
         onPekerjaButton = {},
         onAktivitasButton = {},
-        onCatatanButton = {}
     )
 }
