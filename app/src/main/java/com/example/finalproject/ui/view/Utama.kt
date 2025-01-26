@@ -61,7 +61,7 @@ fun Utama(
             )
 
             MenuCard(
-                imageRes = R.drawable.aktivitas,
+                imageRes = R.drawable.aktif,
                 title = "Aktivitas",
                 buttonColor = Color.Green,
                 onClick = onAktivitasButton

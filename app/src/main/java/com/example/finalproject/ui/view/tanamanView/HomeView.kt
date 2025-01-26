@@ -120,7 +120,7 @@ fun TanamanHomeStatus(
 fun OnLoading(modifier: Modifier = Modifier) {
     Image(
         modifier = modifier.size(200.dp),
-        painter = painterResource(R.drawable.op),
+        painter = painterResource(R.drawable.loading),
         contentDescription = stringResource(R.string.loading)
     )
 }
@@ -132,7 +132,7 @@ fun OnError(retryAction: () -> Unit, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(painter = painterResource(id = R.drawable.op), contentDescription = "")
+        Image(painter = painterResource(id = R.drawable.loading), contentDescription = "")
         Text(
             text = stringResource(R.string.loading_failed),
             style = MaterialTheme.typography.bodyLarge,

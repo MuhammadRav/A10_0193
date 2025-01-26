@@ -131,7 +131,7 @@ fun OnLoading(
 ){
     Image(
         modifier = modifier.size(200.dp),
-        painter = painterResource(R.drawable.op),
+        painter = painterResource(R.drawable.loading),
         contentDescription = stringResource(R.string.loading)
     )
 }
@@ -146,7 +146,7 @@ fun OnError(retryAction: () -> Unit,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.op),
+            painter = painterResource(id = R.drawable.loading),
             contentDescription = ""
         )
         Text(text = stringResource(R.string.loading_failed),
