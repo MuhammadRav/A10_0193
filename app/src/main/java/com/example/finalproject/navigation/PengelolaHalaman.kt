@@ -98,8 +98,8 @@ fun PengelolaHalaman(
             }
         }
         composable(AlamatUpdateTanaman.routesWithArg,
-                arguments = listOf(navArgument(AlamatDetailTanaman.ID_TANAMAN){
-            type = NavType.StringType })
+                arguments = listOf(navArgument(AlamatDetailTanaman.ID_TANAMAN) {
+                    type = NavType.StringType })
         ){
             val id_tanaman = it.arguments?.getString(AlamatUpdateTanaman.ID_TANAMAN)
             id_tanaman?.let { id_tanaman ->

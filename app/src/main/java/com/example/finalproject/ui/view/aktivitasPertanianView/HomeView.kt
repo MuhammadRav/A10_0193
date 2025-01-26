@@ -201,8 +201,8 @@ fun AktivitasPertanianCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = aktivitasPertanian.id_aktivitas,
-                    style = MaterialTheme.typography.titleLarge,
+                    text = aktivitasPertanian.id_tanaman,
+                    style = MaterialTheme.typography.titleMedium,
                 )
                 Spacer(Modifier.weight(1f))
                 IconButton(onClick = { onDeleteClick(aktivitasPertanian) }) {
@@ -212,20 +212,20 @@ fun AktivitasPertanianCard(
                     )
                 }
                 Text(
-                    text = aktivitasPertanian.id_tanaman,
-                    style = MaterialTheme.typography.titleMedium,
+                    text = aktivitasPertanian.id_aktivitas,
+                    style = MaterialTheme.typography.titleLarge,
                 )
             }
             Text(
-                text = aktivitasPertanian.id_pekerja,
+                text = "ID Pekerja: ${aktivitasPertanian.id_pekerja}",
                 style = MaterialTheme.typography.titleMedium,
             )
             Text(
-                text = aktivitasPertanian.tanggal_aktivitas,
+                text = "Tanggal Aktivitas: ${aktivitasPertanian.tanggal_aktivitas}",
                 style = MaterialTheme.typography.titleMedium,
             )
             Text(
-                text = aktivitasPertanian.deskripsi_aktivitas,
+                text = "Deskripsi: ${aktivitasPertanian.deskripsi_aktivitas}",
                 style = MaterialTheme.typography.titleMedium,
             )
         }

@@ -200,7 +200,7 @@ fun PekerjaCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = pekerja.nama_pekerja,
+                    text = "Nama: ${pekerja.nama_pekerja}",
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))
@@ -216,11 +216,11 @@ fun PekerjaCard(
                 )
             }
             Text(
-                text = pekerja.jabatan,
+                text = "Jabatan: ${pekerja.jabatan}",
                 style = MaterialTheme.typography.titleMedium,
             )
             Text(
-                text = pekerja.kontak_pekerja,
+                text = "Kontak: ${pekerja.kontak_pekerja}",
                 style = MaterialTheme.typography.titleMedium,
             )
         }

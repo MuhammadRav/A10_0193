@@ -200,8 +200,8 @@ fun CatatanPanenCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = catatanPanen.id_panen,
-                    style = MaterialTheme.typography.titleLarge,
+                    text = catatanPanen.id_tanaman,
+                    style = MaterialTheme.typography.titleMedium,
                 )
                 Spacer(Modifier.weight(1f))
                 IconButton(onClick = { onDeleteClick(catatanPanen) }) {
@@ -211,20 +211,20 @@ fun CatatanPanenCard(
                     )
                 }
                 Text(
-                    text = catatanPanen.id_tanaman,
-                    style = MaterialTheme.typography.titleMedium,
+                    text = catatanPanen.id_panen,
+                    style = MaterialTheme.typography.titleLarge,
                 )
             }
             Text(
-                text = catatanPanen.tanggal_panen,
+                text = "Tanggal panen: ${catatanPanen.tanggal_panen}",
                 style = MaterialTheme.typography.titleMedium,
             )
             Text(
-                text = catatanPanen.jumlah_panen,
+                text = "Jumlah: ${catatanPanen.jumlah_panen}",
                 style = MaterialTheme.typography.titleMedium,
             )
             Text(
-                text = catatanPanen.keterangan,
+                text = "Keterangan: ${catatanPanen.keterangan}",
                 style = MaterialTheme.typography.titleMedium,
             )
         }

@@ -8,7 +8,7 @@ interface AlamatNavigasi {
 // Tanaman
 object AlamatInsertTanaman : AlamatNavigasi {
     override val route = "insert_tanaman"
-    override val titleRes = "Insert Tanaman"
+    override val titleRes = "Tambah Tanaman"
 }
 
 object AlamatUpdateTanaman : AlamatNavigasi {
@@ -27,13 +27,13 @@ object AlamatDetailTanaman : AlamatNavigasi {
 
 object AlamatHomeTanaman : AlamatNavigasi {
     override val route = "home_tanaman"
-    override val titleRes = "Home Tanaman"
+    override val titleRes = "Daftar Tanaman"
 }
 
 // Pekerja
 object AlamatInsertPekerja : AlamatNavigasi {
     override val route = "insert_pekerja"
-    override val titleRes = "Insert Pekerja"
+    override val titleRes = "Tambah Pekerja"
 }
 
 object AlamatUpdatePekerja : AlamatNavigasi {
@@ -52,13 +52,13 @@ object AlamatDetailPekerja : AlamatNavigasi {
 
 object AlamatHomePekerja : AlamatNavigasi {
     override val route = "home_pekerja"
-    override val titleRes = "Home Pekerja"
+    override val titleRes = "Daftar Pekerja"
 }
 
 // Aktivitas
 object AlamatInsertAktivitas : AlamatNavigasi {
     override val route = "insert_aktivitas"
-    override val titleRes = "Insert Aktivitas"
+    override val titleRes = "Tambah Aktivitas"
 }
 
 object AlamatUpdateAktivitas : AlamatNavigasi {
@@ -77,35 +77,35 @@ object AlamatDetailAktivitas : AlamatNavigasi {
 
 object AlamatHomeAktivitas : AlamatNavigasi {
     override val route = "home_aktivitas"
-    override val titleRes = "Home Aktivitas"
+    override val titleRes = "Daftar Aktivitas"
 }
 
 // Catatan
 object AlamatInsertCatatan : AlamatNavigasi {
     override val route = "insert_catatan"
-    override val titleRes = "Insert Catatan"
+    override val titleRes = "Tambah Catatan Panen"
 }
 
 object AlamatUpdateCatatan : AlamatNavigasi {
     override val route = "update_catatan"
-    override val titleRes = "Update Catatan"
+    override val titleRes = "Update Catatan Panen"
     const val ID_PANEN = "id_panen"
     val routesWithArg = "$route/{$ID_PANEN}"
 }
 
 object AlamatDetailCatatan : AlamatNavigasi {
     override val route = "detail_catatan"
-    override val titleRes = "Detail Catatan"
+    override val titleRes = "Detail Catatan Panen"
     const val ID_PANEN = "id_panen"
     val routesWithArg = "$route/{${ID_PANEN}}"
 }
 
 object AlamatHomeCatatan : AlamatNavigasi {
     override val route = "home_panen"
-    override val titleRes = "Home Panen"
+    override val titleRes = "Riwayat Panen"
 }
 
 object Utama : AlamatNavigasi {
     override val route = "utama"
-    override val titleRes = "Halaman Utama"
+    override val titleRes = "Aktivitas"
 }
