@@ -10,17 +10,22 @@ import com.example.finalproject.model.Tanaman
 import com.example.finalproject.navigation.AlamatUpdateCatatan
 import com.example.finalproject.repository.CatatanPanenRepository
 import com.example.finalproject.repository.TanamanRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class CatatanPanenUpdateViewModel(
     savedStateHandle: SavedStateHandle,
     private val ctp: CatatanPanenRepository,
-//    private val tnm: TanamanRepository
+    private val tnm: TanamanRepository
 ) : ViewModel() {
+
     var UpdateUiState by mutableStateOf(InsertUiState())
         private set
-//    var tnmlist by mutableStateOf<List<Tanaman>>(emptyList())
-//        private set
+
+    // Menggunakan MutableStateFlow untuk _tanamanList
+    private val _tanamanList = MutableStateFlow<List<Tanaman>>(emptyList())
+    val tanamanList: StateFlow<List<Tanaman>> get() = _tanamanList // Mengakses _tanamanList sebagai StateFlow
 
     private val _id_panen: String = checkNotNull(savedStateHandle[AlamatUpdateCatatan.ID_PANEN])
 
@@ -28,30 +33,32 @@ class CatatanPanenUpdateViewModel(
         viewModelScope.launch {
             UpdateUiState = ctp.getCatatanPanenById(_id_panen)
                 .toUiStateCatatanPanen()
-//            getTanaman()
+            getTanaman()
         }
     }
-    fun updateInsertCatatanPanenState(insertUiEvent: InsertUiEvent){
+
+    fun updateInsertCatatanPanenState(insertUiEvent: InsertUiEvent) {
         UpdateUiState = InsertUiState(insertUiEvent = insertUiEvent)
     }
 
-    fun updateCatatanPanen(){
+    fun updateCatatanPanen() {
         viewModelScope.launch {
             try {
                 ctp.updateCatatanPanen(_id_panen, UpdateUiState.insertUiEvent.toCatatanPanen())
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
-//    private fun getTanaman() {
-//        viewModelScope.launch {
-//            try {
-//                val tnmData = tnm.getTanaman()
-//                tnmlist = tnmData.data
-//            } catch (e: Exception) {
-//                tnmlist = emptyList()
-//            }
-//        }
-//    }
+
+    private fun getTanaman() {
+        viewModelScope.launch {
+            try {
+                val tnmData = tnm.getTanaman()
+                _tanamanList.value = tnmData.data // Mengubah nilai _tanamanList menggunakan .value
+            } catch (e: Exception) {
+                _tanamanList.value = emptyList() // Menetapkan nilai kosong jika ada error
+            }
+        }
+    }
 }

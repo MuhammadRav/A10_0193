@@ -18,7 +18,7 @@ object PenyediaCatatanPanenViewModel {
         initializer {
             CatatanPanenInsertViewModel(
                 aplikasiCatatanPanen().container.catatanPanenRepository,
-//                aplikasiCatatanPanen().container.tanamanRepository
+                aplikasiCatatanPanen().container.tanamanRepository
             )
         }
 
@@ -33,7 +33,7 @@ object PenyediaCatatanPanenViewModel {
             CatatanPanenUpdateViewModel(
                 createSavedStateHandle(),
                 aplikasiCatatanPanen().container.catatanPanenRepository,
-//                aplikasiCatatanPanen().container.tanamanRepository
+                aplikasiCatatanPanen().container.tanamanRepository
             )
         }
     }

@@ -187,7 +187,7 @@ fun CatatanPanenCard(
     onDeleteClick: (CatatanPanen) -> Unit
 ){
     Card (
-        modifier = modifier,
+        modifier = modifier.padding(bottom = 20.dp),
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
