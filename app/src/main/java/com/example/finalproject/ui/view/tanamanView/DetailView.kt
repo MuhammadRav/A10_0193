@@ -43,6 +43,8 @@ import com.example.finalproject.ui.viewModel.tanamanViewModel.TanamanDetailViewM
 fun TanamanDetailScreen(
     navigateBack: () -> Unit,
     onUpdateButton: () -> Unit,
+    onPanenButton: () -> Unit,
+    onDetailLebihLanjutButton: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: TanamanDetailViewModel = viewModel(factory = PenyediaTanamanViewModel.Factory)
 ) {
@@ -79,18 +81,21 @@ fun TanamanDetailScreen(
                     if (state is DetailUiState.Success) state.tanaman.id_tanaman else ""
                 })
                 navigateBack()
-            }
+            },
+            onPanenButton = onPanenButton,
+            onDetailLebihLanjutButton = onDetailLebihLanjutButton
         )
     }
 }
-
 
 @Composable
 fun TanamanDetailStatus(
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,
     detailUiState: DetailUiState,
-    onDeleteClick: () -> Unit
+    onDeleteClick: () -> Unit,
+    onPanenButton: () -> Unit,
+    onDetailLebihLanjutButton: () -> Unit
 ) {
     when (detailUiState) {
         is DetailUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
@@ -103,7 +108,9 @@ fun TanamanDetailStatus(
                 ItemDetailTanaman(
                     tanaman = detailUiState.tanaman,
                     modifier = modifier.fillMaxWidth(),
-                    onDeleteClick = onDeleteClick
+                    onDeleteClick = onDeleteClick,
+                    onPanenButton = onPanenButton,
+                    onDetailLebihLanjutButton = onDetailLebihLanjutButton
                 )
             }
         }
@@ -111,12 +118,13 @@ fun TanamanDetailStatus(
     }
 }
 
-
 @Composable
 fun ItemDetailTanaman(
     modifier: Modifier = Modifier,
     tanaman: Tanaman,
-    onDeleteClick: () -> Unit
+    onDeleteClick: () -> Unit,
+    onPanenButton: () -> Unit,
+    onDetailLebihLanjutButton: () -> Unit
 ) {
     var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
     Card(
@@ -139,12 +147,28 @@ fun ItemDetailTanaman(
             Spacer(modifier = Modifier.padding(8.dp))
 
             Button(
-                onClick = {
-                    deleteConfirmationRequired = true
-                },
+                onClick = { deleteConfirmationRequired = true },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = "Delete")
+            }
+
+            Spacer(modifier = Modifier.padding(8.dp))
+
+            Button(
+                onClick = onPanenButton,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Tambah Panen")
+            }
+
+            Spacer(modifier = Modifier.padding(8.dp))
+
+            Button(
+                onClick = onDetailLebihLanjutButton,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Detail Lebih Lanjut")
             }
 
             if (deleteConfirmationRequired) {
