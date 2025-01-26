@@ -33,25 +33,19 @@ fun PengelolaHalaman(
     ){
     NavHost(
         navController=navController,
-        startDestination = Utama.route,
+        startDestination = AlamatHomeTanaman.route,
         modifier = Modifier,
     ){
         composable(
             route = Utama.route
         ) {
             Utama(
-                onTanamanButton = {
-                    navController.navigate(AlamatHomeTanaman.route)
-                },
                 onPekerjaButton = {
                     navController.navigate(AlamatHomePekerja.route)
                 },
                 onAktivitasButton = {
                     navController.navigate(AlamatHomeAktivitas.route)
                 },
-                onCatatanButton = {
-                    navController.navigate(AlamatHomeCatatan.route)
-                }
             )
         }
         composable(
@@ -81,17 +75,24 @@ fun PengelolaHalaman(
                 }
             })
         }
-        composable(AlamatDetailTanaman.routesWithArg,
-            arguments = listOf(navArgument(AlamatDetailTanaman.ID_TANAMAN) {
-            type = NavType.StringType })
-        ){
-            val id_tanaman = it.arguments?.getString(AlamatDetailTanaman.ID_TANAMAN)
-            id_tanaman?.let { id_tanaman ->
+        composable(
+            route = AlamatDetailTanaman.routesWithArg,
+            arguments = listOf(navArgument(AlamatDetailTanaman.ID_TANAMAN) { type = NavType.StringType })
+        ) { backStackEntry ->
+            val idTanaman = backStackEntry.arguments?.getString(AlamatDetailTanaman.ID_TANAMAN)
+            idTanaman?.let {
                 TanamanDetailScreen(
-                    onUpdateButton = { navController.navigate("${AlamatUpdateTanaman.route}/$id_tanaman") },
-                    navigateBack = { navController.navigate(AlamatHomeTanaman.route) {
-                        popUpTo(AlamatHomeTanaman.route) { inclusive = true }
-                    }
+                    onUpdateButton = { navController.navigate("${AlamatUpdateTanaman.route}/$idTanaman") },
+                    navigateBack = {
+                        navController.navigate(AlamatHomeTanaman.route) {
+                            popUpTo(AlamatHomeTanaman.route) { inclusive = true }
+                        }
+                    },
+                    onPanenButton = {
+                        navController.navigate(AlamatHomeCatatan.route) // Navigasi ke catatan panen
+                    },
+                    onDetailLebihLanjutButton = {
+                        navController.navigate(Utama.route) // Navigasi ke catatan panen
                     }
                 )
             }
