@@ -124,6 +124,13 @@ fun PengelolaHalaman(
                 onAddPekerja = {
                     navController.navigate(AlamatInsertPekerja.route)
                 },
+                navigateBack = {
+                    navController.navigate(Utama.route){
+                        popUpTo(Utama.route){
+                            inclusive = true
+                        }
+                    }
+                },
                 modifier = modifier
             )
         }
@@ -180,6 +187,13 @@ fun PengelolaHalaman(
                 onAddCatatan = {
                     navController.navigate(AlamatInsertCatatan.route)
                 },
+                navigateBack = {
+                    navController.navigate(AlamatHomeTanaman.route){
+                        popUpTo(AlamatHomeTanaman.route){
+                            inclusive = true
+                        }
+                    }
+                },
                 modifier = modifier
             )
         }
@@ -235,6 +249,13 @@ fun PengelolaHalaman(
                 },
                 onAddAktivitas = {
                     navController.navigate(AlamatInsertAktivitas.route)
+                },
+                navigateBack = {
+                    navController.navigate(Utama.route){
+                        popUpTo(Utama.route){
+                            inclusive = true
+                        }
+                    }
                 },
                 modifier = modifier
             )

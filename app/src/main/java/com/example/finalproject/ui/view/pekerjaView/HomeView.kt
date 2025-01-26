@@ -47,6 +47,7 @@ import com.example.finalproject.ui.viewModel.pekerjaViewModel.PenyediaPekerjaVie
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PekerjaHomeScreen(
+    navigateBack: () -> Unit,
     onAddPekerja: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
@@ -58,7 +59,8 @@ fun PekerjaHomeScreen(
         topBar = {
             CstTopAppBar(
                 title = AlamatHomePekerja.titleRes,
-                canNavigateBack = false,
+                canNavigateBack = true,
+                navigateUp = navigateBack,
                 scrollBehavior = scrollBehavior,
                 onRefresh = {
                     viewModel.getPekerja()
@@ -84,6 +86,7 @@ fun PekerjaHomeScreen(
             onDeleteClick = {
                 viewModel.deletePekerja(it.id_pekerja)
                 viewModel.getPekerja()
+                navigateBack()
             }
         )
     }

@@ -48,6 +48,7 @@ import com.example.finalproject.ui.viewModel.aktivitasPertanianViewModel.Penyedi
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AktivitasPertanianHomeScreen(
+    navigateBack: () -> Unit,
     onAddAktivitas: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
@@ -59,7 +60,8 @@ fun AktivitasPertanianHomeScreen(
         topBar = {
             CstTopAppBar(
                 title = AlamatHomeAktivitas.titleRes,
-                canNavigateBack = false,
+                canNavigateBack = true,
+                navigateUp = navigateBack,
                 scrollBehavior = scrollBehavior,
                 onRefresh = {
                     viewModel.getAktivitasPertanian()
@@ -85,6 +87,7 @@ fun AktivitasPertanianHomeScreen(
             onDeleteClick = {
                 viewModel.deleteAktivitasPertanian(it.id_aktivitas)
                 viewModel.getAktivitasPertanian()
+                navigateBack()
             }
         )
     }

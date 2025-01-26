@@ -39,7 +39,7 @@ fun Utama(
         modifier = Modifier.fillMaxSize()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.op),
+            painter = painterResource(id = R.drawable.bg),
             contentDescription = "",
             modifier = Modifier
                 .fillMaxSize()
@@ -128,13 +128,4 @@ fun MenuCard(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun UtamaPreview() {
-    Utama(
-        onPekerjaButton = {},
-        onAktivitasButton = {},
-    )
 }

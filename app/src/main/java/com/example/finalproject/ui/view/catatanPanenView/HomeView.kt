@@ -47,6 +47,7 @@ import com.example.finalproject.ui.viewModel.catatanPanenViewModel.PenyediaCatat
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CatatanPanenHomeScreen(
+    navigateBack: () -> Unit,
     onAddCatatan: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
@@ -58,7 +59,8 @@ fun CatatanPanenHomeScreen(
         topBar = {
             CstTopAppBar(
                 title = AlamatHomeCatatan.titleRes,
-                canNavigateBack = false,
+                canNavigateBack = true,
+                navigateUp = navigateBack,
                 scrollBehavior = scrollBehavior,
                 onRefresh = {
                     viewModel.getCatatanPanen()
@@ -84,6 +86,7 @@ fun CatatanPanenHomeScreen(
             onDeleteClick = {
                 viewModel.deleteCatatanPanen(it.id_panen)
                 viewModel.getCatatanPanen()
+                navigateBack()
             }
         )
     }
