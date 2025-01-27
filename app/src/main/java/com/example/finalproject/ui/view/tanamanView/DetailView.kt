@@ -1,7 +1,9 @@
 package com.example.finalproject.ui.view.tanamanView
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -155,20 +158,25 @@ fun ItemDetailTanaman(
 
             Spacer(modifier = Modifier.padding(8.dp))
 
-            Button(
-                onClick = onPanenButton,
-                modifier = Modifier.fillMaxWidth()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text(text = "Tambah Panen")
-            }
+                Button(
+                    onClick = onPanenButton,
+                    modifier = Modifier.weight(1f),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                ) {
+                    Text(text = "Tambah Panen")
+                }
 
-            Spacer(modifier = Modifier.padding(8.dp))
-
-            Button(
-                onClick = onDetailLebihLanjutButton,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = "Detail Lebih Lanjut")
+                Button(
+                    onClick = onDetailLebihLanjutButton,
+                    modifier = Modifier.weight(1f),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                ) {
+                    Text(text = "Detail Lebih Lanjut")
+                }
             }
 
             if (deleteConfirmationRequired) {
@@ -205,7 +213,6 @@ fun ComponentDetailTanaman(
             text = isinya,
             fontSize = 18.sp,
             fontWeight = FontWeight.Medium,
-//            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }

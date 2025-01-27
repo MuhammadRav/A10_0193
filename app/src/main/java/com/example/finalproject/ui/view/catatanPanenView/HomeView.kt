@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,7 +32,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -80,13 +83,12 @@ fun CatatanPanenHomeScreen(
     ){ innerPadding ->
         CatatanPanenHomeStatus(
             homeUiState = viewModel.ctpUiState,
-            retryAction = { viewModel.getCatatanPanen()},
+            retryAction = { viewModel.getCatatanPanen() },
             modifier = Modifier.padding(innerPadding),
             onDetailClick = onDetailClick,
-            onDeleteClick = {
-                viewModel.deleteCatatanPanen(it.id_panen)
+            onDeleteClick = { catatan ->
+                viewModel.deleteCatatanPanen(catatan.id_panen)
                 viewModel.getCatatanPanen()
-                navigateBack()
             }
         )
     }
@@ -188,48 +190,68 @@ fun CatatanPanenCard(
     catatanPanen: CatatanPanen,
     modifier: Modifier = Modifier,
     onDeleteClick: (CatatanPanen) -> Unit
-){
-    Card (
-        modifier = modifier.padding(bottom = 20.dp),
+) {
+    Card(
+        modifier = modifier
+            .padding(bottom = 20.dp)
+            .fillMaxWidth()
+            .height(170.dp),
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+        Box(Modifier.fillMaxWidth()) {
+            Image(
+                painter = painterResource(id = R.drawable.card2),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text(
-                    text = catatanPanen.id_tanaman,
-                    style = MaterialTheme.typography.titleMedium,
-                )
-                Spacer(Modifier.weight(1f))
-                IconButton(onClick = { onDeleteClick(catatanPanen) }) {
-                    Icon(
-                        imageVector = Icons.Default.Delete,
-                        contentDescription = null,
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = catatanPanen.id_tanaman,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = Color.Black
+                    )
+                    Spacer(Modifier.weight(1f))
+                    IconButton(onClick = { onDeleteClick(catatanPanen) }) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = null,
+                            tint = Color.Black
+                        )
+                    }
+                    Text(
+                        text = catatanPanen.id_panen,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.Black
                     )
                 }
                 Text(
-                    text = catatanPanen.id_panen,
-                    style = MaterialTheme.typography.titleLarge,
+                    text = "Tanggal panen: ${catatanPanen.tanggal_panen}",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.Black
+                )
+                Text(
+                    text = "Jumlah: ${catatanPanen.jumlah_panen}",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.Black
+                )
+                Text(
+                    text = "Keterangan: ${catatanPanen.keterangan}",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.Black
                 )
             }
-            Text(
-                text = "Tanggal panen: ${catatanPanen.tanggal_panen}",
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(
-                text = "Jumlah: ${catatanPanen.jumlah_panen}",
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(
-                text = "Keterangan: ${catatanPanen.keterangan}",
-                style = MaterialTheme.typography.titleMedium,
-            )
         }
     }
 }
